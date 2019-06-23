@@ -18,8 +18,6 @@ app.use(routes);
 // * ==================== CONNECT DB ==================== *//
 connectDB();
 
-app.get('/', (req, res) => res.send('API Running'));
-
 app.listen(PORT, () =>
   console.log(`Server started on port http://localhost/${PORT}`)
 );

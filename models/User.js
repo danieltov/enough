@@ -17,19 +17,19 @@ const UserSchema = new mongoose.Schema({
   affirmations: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'achievements'
+      ref: 'achievement'
     },
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'favoriteQuotes'
+      ref: 'quote'
     },
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'gratitudes'
+      ref: 'gratitude'
     },
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'strengths'
+      ref: 'strength'
     }
   ],
   favoriteAnimal: {
