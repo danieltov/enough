@@ -4,8 +4,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('dotenv').config();
-const { check, validationResult } = require('express-validator/check'); // ! use express-validate to handle validation and responses
-const User = require('../../models/User');
+const { validationResult, body, sanitizeBody } = require('express-validator');
+const DB = require('../../models');
 
 // * ==================== ROUTES ==================== *//
 
@@ -17,11 +17,15 @@ router.post(
   '/',
   [
     // ! express-validate functions to validate request body START
-    check('name', 'Please enter a name to call you by')
+    body('name', 'Please enter a name to call you by')
       .not()
-      .isEmpty(),
-    check('email', 'Please enter a valid email address').isEmail(),
-    check(
+      .isEmpty()
+      .trim()
+      .escape(),
+    body('email', 'Please enter a valid email address')
+      .isEmail()
+      .normalizeEmail(),
+    body(
       'password',
       'Please enter a password with 8 or more characters'
     ).isLength({ min: 8 })
@@ -39,7 +43,7 @@ router.post(
 
     try {
       // * See if user exists
-      let user = await User.findOne({ email });
+      let user = await DB.User.findOne({ email });
 
       if (user) {
         return res
@@ -48,7 +52,7 @@ router.post(
       }
 
       // * Create an instance of the user
-      user = new User({ name, email, password });
+      user = new DB.User({ name, email, password });
 
       // * Encrypt password with bcrypt
       const salt = await bcrypt.genSalt(10);
@@ -72,6 +76,171 @@ router.post(
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
+    }
+  }
+);
+
+// * @route   POST api/users/aff
+// * @desc    Create new quote, gratitude, strength affirmations on user
+// * @access  Private
+
+router.post(
+  '/',
+  [
+    auth,
+    [
+      // ! express-validate functions to validate request body START
+      body('text', 'Text is required')
+        .not()
+        .isEmpty()
+        .trim()
+        .escape(),
+      body('affirmationType', 'An Affirmation Type is required')
+        .not()
+        .isEmpty()
+      // ! express-validate functions to validate request body END
+    ]
+  ],
+  async (req, res) => {
+    // ! express-validate error catching START
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array()
+      });
+    }
+    // ! express-validate error catching END
+
+    // * Destructure req.body
+    const { text, image, dateAdded, author, affirmationType } = req.body;
+
+    // * Build affirmation object
+    const affirmationFields = {};
+    affirmationFields.user = req.user;
+    affirmationFields.text = text;
+    affirmationFields.affirmationType = affirmationType;
+    if (image) affirmationFields.image = image;
+    if (dateAdded) affirmationFields.dateAdded = dateAdded;
+    if (author) affirmationFields.author = author;
+
+    // * Add affirmationFields to corresponding model
+    try {
+      if (affirmationFields.affirmationType === 'gratitude') {
+        const user = await DB.Gratitude.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: affirmationFields },
+          { new: true }
+        );
+        return res.json(user);
+      } else if (affirmationFields.affirmationType === 'quote') {
+        const user = await DB.Quote.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: affirmationFields },
+          { new: true }
+        );
+        return res.json(user);
+      } else {
+        const user = await DB.Strength.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: affirmationFields },
+          { new: true }
+        );
+        return res.json(user);
+      }
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// * @route   POST api/users/aff/achievement
+// * @desc    Create new achievements on user
+// * @access  Private
+
+router.post(
+  '/',
+  [
+    auth,
+    [
+      // ! express-validate functions to validate request body START
+      body('text', 'Text is required')
+        .not()
+        .isEmpty()
+        .trim()
+        .escape(),
+      body('affirmationType', 'An Affirmation Type is required')
+        .not()
+        .isEmpty(),
+      body('title', 'A title is required')
+        .not()
+        .isEmpty()
+        .trim()
+        .escape(),
+      sanitizeBody('dateAchieved', 'A valid date is required')
+        .not()
+        .isEmpty()
+        .toDate(),
+      body(
+        'madeMeFeel',
+        'A short sentence of how this achievement made you feel is required'
+      )
+        .not()
+        .isEmpty()
+        .trim()
+        .escape()
+      // ! express-validate functions to validate request body END
+    ]
+  ],
+  async (req, res) => {
+    // ! express-validate error catching START
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array()
+      });
+    }
+    // ! express-validate error catching END
+
+    // * Destructure req.body
+    const { text, image, dateAdded, author, affirmationType } = req.body;
+
+    // * Build affirmation object
+    const affirmationFields = {};
+    affirmationFields.user = req.user;
+    affirmationFields.text = text;
+    affirmationFields.affirmationType = affirmationType;
+    if (image) affirmationFields.image = image;
+    if (dateAdded) affirmationFields.dateAdded = dateAdded;
+    if (author) affirmationFields.author = author;
+
+    // * Add affirmationFields to corresponding model
+    try {
+      if (affirmationFields.affirmationType === 'gratitude') {
+        const user = await DB.Gratitude.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: affirmationFields },
+          { new: true }
+        );
+        return res.json(user);
+      } else if (affirmationFields.affirmationType === 'quote') {
+        const user = await DB.Quote.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: affirmationFields },
+          { new: true }
+        );
+        return res.json(user);
+      } else {
+        const user = await DB.Strength.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: affirmationFields },
+          { new: true }
+        );
+        return res.json(user);
+      }
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
     }
   }
 );
