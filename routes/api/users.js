@@ -1,11 +1,13 @@
 // * ==================== DEPENDENCIES ==================== *//
 const express = require('express');
+const config = require('dotenv').config();
+const { validationResult, body } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('dotenv').config();
-const { validationResult, body, sanitizeBody } = require('express-validator');
 const DB = require('../../models');
+const auth = require('../../middleware/auth');
 
 // * ==================== ROUTES ==================== *//
 
@@ -177,10 +179,10 @@ router.post(
         .isEmpty()
         .trim()
         .escape(),
-      sanitizeBody('dateAchieved', 'A valid date is required')
+      body('dateAchieved', 'A valid date is required')
         .not()
-        .isEmpty()
-        .toDate(),
+        .isEmpty(),
+      sanitizeBody('dateAchieved').toDate(),
       body(
         'madeMeFeel',
         'A short sentence of how this achievement made you feel is required'
@@ -203,41 +205,42 @@ router.post(
     // ! express-validate error catching END
 
     // * Destructure req.body
-    const { text, image, dateAdded, author, affirmationType } = req.body;
+    const {
+      text,
+      image,
+      dateAdded,
+      affirmationType,
+      title,
+      dateAchieved,
+      madeMeFeel
+    } = req.body;
 
     // * Build affirmation object
     const affirmationFields = {};
     affirmationFields.user = req.user;
     affirmationFields.text = text;
     affirmationFields.affirmationType = affirmationType;
+    affirmationFields.dateAdded = dateAdded;
+    affirmationFields.title = title;
+    affirmationFields.dateAchieved = dateAchieved;
+    affirmationFields.madeMeFeel = madeMeFeel;
     if (image) affirmationFields.image = image;
-    if (dateAdded) affirmationFields.dateAdded = dateAdded;
-    if (author) affirmationFields.author = author;
 
-    // * Add affirmationFields to corresponding model
+    // * Add affirmationFields to model
     try {
-      if (affirmationFields.affirmationType === 'gratitude') {
-        const user = await DB.Gratitude.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: affirmationFields },
-          { new: true }
-        );
-        return res.json(user);
-      } else if (affirmationFields.affirmationType === 'quote') {
-        const user = await DB.Quote.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: affirmationFields },
-          { new: true }
-        );
-        return res.json(user);
-      } else {
-        const user = await DB.Strength.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: affirmationFields },
-          { new: true }
-        );
-        return res.json(user);
+      // * make sure dateAchieved isn't null
+      if (affirmationFields.dateAchieved === null) {
+        return res.status(400).json({
+          msg: 'Accomplishment achieved date is inavlid'
+        });
       }
+
+      const user = await DB.Achievement.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: affirmationFields },
+        { new: true }
+      );
+      return res.json(user);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
