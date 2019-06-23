@@ -231,7 +231,7 @@ router.post(
       // * make sure dateAchieved isn't null
       if (affirmationFields.dateAchieved === null) {
         return res.status(400).json({
-          msg: 'Accomplishment achieved date is inavlid'
+          msg: 'Accomplishment Achieved Date is inavlid'
         });
       }
 
