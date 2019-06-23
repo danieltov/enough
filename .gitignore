@@ -1,6 +1,7 @@
 #### Server Ignores ####
 .env
 node_modules
+package-lock.json
 
 #### Client Ignores ####
 
