@@ -14,24 +14,33 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  affirmations: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'achievement'
-    },
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'quote'
-    },
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'gratitude'
-    },
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'strength'
-    }
-  ],
+  affirmations: [, , ,],
+  affirmations: {
+    achievements: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'achievement'
+      }
+    ],
+    quotes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'quote'
+      }
+    ],
+    gratitudes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'gratitude'
+      }
+    ],
+    strength: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'strength'
+      }
+    ]
+  },
   favoriteAnimal: {
     type: String,
     required: false
