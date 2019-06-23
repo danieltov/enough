@@ -1,6 +1,9 @@
+// * ==================== CONFIG SETUP ==================== *//
 const mongoose = require('mongoose');
 const config = require('dotenv').config();
 const db = process.env.MONGODB_URI || 'mongodb://localhost/yreDB';
+
+// * ==================== CONFIG FUNCTION ==================== *//
 
 const connectDB = async () => {
   try {
