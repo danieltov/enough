@@ -18,10 +18,12 @@ const User = require('../../models/User');
 
 router.get('/', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password'); // select method '-password' leaves off password
+    const user = await User.findById(req.user.id)
+      .populate(['affirmations'])
+      .select('-password'); // select method '-password' leaves off password
     res.json(user);
   } catch (err) {
-    console.err(err.message);
+    console.error(err.message);
     res.status(500).send('Server error');
   }
 });
