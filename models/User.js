@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema({
         ref: 'gratitude'
       }
     ],
-    strength: [
+    strengths: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'strength'
