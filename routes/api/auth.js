@@ -13,13 +13,18 @@ const User = require('../../models/User');
 // * ==================== ROUTES ==================== *//
 
 // * @route   GET api/auth
-// * @desc    Check token & get user
+// * @desc    Login Route checks token & gets user
 // * @access  Private
 
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id)
-      .populate(['affirmations'])
+      .populate([
+        'affirmations.strengths',
+        'affirmations.achievements',
+        'affirmations.quotes',
+        'affirmations.gratitudes'
+      ])
       .select('-password'); // select method '-password' leaves off password
     res.json(user);
   } catch (err) {
