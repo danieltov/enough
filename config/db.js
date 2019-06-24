@@ -1,7 +1,7 @@
 // * ==================== CONFIG SETUP ==================== *//
 const mongoose = require('mongoose');
 const config = require('dotenv').config();
-const db = process.env.MONGODB_URI || 'mongodb://localhost/yreDB';
+const db = process.env.MONGODB_URI || 'mongodb://localhost/uredb';
 
 // * ==================== CONFIG FUNCTION ==================== *//
 
