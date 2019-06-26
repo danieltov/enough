@@ -42,5 +42,6 @@
   "bugs": {
     "url": "https://github.com/danieltov/you-are-enough/issues"
   },
-  "homepage": "https://github.com/danieltov/you-are-enough#readme"
+  "homepage": "https://github.com/danieltov/you-are-enough#readme",
+  "proxy": "http://localhost:5001"
 }
