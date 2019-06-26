@@ -3,6 +3,7 @@
 node_modules
 package-lock.json
 enough.bsdesign
+.DS_Store
 
 #### Client Ignores ####
 
