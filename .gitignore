@@ -14,6 +14,9 @@ enough.bsdesign
 # testing
 /client/coverage
 
+# static
+/client/static
+
 # production
 client/build
 
