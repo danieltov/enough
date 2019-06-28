@@ -5,12 +5,11 @@ import './Navbar.css';
 
 export const EnoughNav = () => {
   return (
-    <>
-      <Navbar expand='lg'>
-        <Navbar.Brand href='#home'>Enough</Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse id='nav' />
-        <Nav className='mr-auto'>
+    <Navbar expand='lg'>
+      <Navbar.Brand href='#home'>Enough</Navbar.Brand>
+      <Navbar.Toggle aria-controls='basic-navbar-nav' />
+      <Navbar.Collapse id='nav'>
+        <Nav className='ml-auto'>
           <Nav.Link href='#home' className='btn ml-auto action-button border-0'>
             Login
           </Nav.Link>
@@ -18,7 +17,7 @@ export const EnoughNav = () => {
             Signin
           </Nav.Link>
         </Nav>
-      </Navbar>
-    </>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
