@@ -13,7 +13,7 @@ import Dashboard from './pages/Dashboard';
 
 // * ==================== REDUX ==================== *//
 import { Provider } from 'react-redux';
-import store from '../store';
+import store from './store';
 
 // * ==================== STYLES ==================== *//
 import './App.css';
