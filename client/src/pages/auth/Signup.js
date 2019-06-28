@@ -15,12 +15,12 @@ const Signup = () => {
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('Passwords do not match');
+      console.log('Passwords do not match!');
     } else {
-      console.log(formData);
+      console.log('SUCCESS!');
     }
   };
 
@@ -39,7 +39,7 @@ const Signup = () => {
       <Col
         xs={12}
         md={6}
-        className='d-none d-md-flex justify-content-center align-items-start'>
+        className='d-flex justify-content-center align-items-start'>
         <div className='form-container'>
           <Form validated onSubmit={e => onSubmit(e)}>
             <h2 className='text-center'>
