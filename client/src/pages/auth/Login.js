@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Image, Form } from 'react-bootstrap';
+import { Row, Col, Image, Form, Button } from 'react-bootstrap';
 import Link from 'react-router-dom/Link';
 
 class Login extends Component {
@@ -26,25 +26,19 @@ class Login extends Component {
                 <strong>Login</strong> to your account.
               </h2>
               <Form.Group>
-                <input
-                  className='form-control'
-                  type='email'
-                  name='email'
-                  placeholder='Email'
-                />
+                <Form.Control type='email' name='email' placeholder='Email' />
               </Form.Group>
               <Form.Group>
-                <input
-                  className='form-control'
+                <Form.Control
                   type='password'
                   name='password'
                   placeholder='Password'
                 />
               </Form.Group>
               <Form.Group>
-                <button className='btn btn-primary btn-block' type='submit'>
+                <Button variant='primary' size='lg' block onClick={() => {}}>
                   Login
-                </button>
+                </Button>
               </Form.Group>
               <Link to='/signup' className='already'>
                 Don't have an account? Signup here.
