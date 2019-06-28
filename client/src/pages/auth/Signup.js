@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Row, Col, Image, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { setNotice } from '../../actions/notice';
 
-const Signup = () => {
+// ! Note: Destructuring props | ({setNotice}) = props.setNotice.
+const Signup = ({ setNotice }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,7 +22,7 @@ const Signup = () => {
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('Passwords do not match!');
+      setNotice('Passwords do not match', 'danger');
     } else {
       console.log('SUCCESS!');
     }
@@ -100,4 +104,13 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+Signup.propTypes = {
+  setNotice: PropTypes.func.isRequired
+};
+
+// ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
+
+export default connect(
+  null,
+  { setNotice }
+)(Signup);
