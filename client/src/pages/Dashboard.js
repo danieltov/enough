@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
+// import { Link } from 'react-router-dom';
 
 class Dashboard extends Component {
   render() {

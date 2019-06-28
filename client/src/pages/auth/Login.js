@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Image, Form, Button } from 'react-bootstrap';
-import Link from 'react-router-dom/Link';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   render() {
