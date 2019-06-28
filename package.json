@@ -1,5 +1,5 @@
 {
-  "name": "you-are-enough",
+  "name": "enough",
   "version": "0.1.0",
   "description": "an app that reminds users dealing with depression of positive affirmations that they themselves entered",
   "main": "server.js",
@@ -42,6 +42,5 @@
   "bugs": {
     "url": "https://github.com/danieltov/you-are-enough/issues"
   },
-  "homepage": "https://github.com/danieltov/you-are-enough#readme",
-  "proxy": "http://localhost:5001"
+  "homepage": "https://github.com/danieltov/you-are-enough#readme"
 }
