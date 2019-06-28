@@ -185,6 +185,10 @@ body {
   text-decoration: none;
 }
 
+.dash-icon {
+  font-size: 10em !important;
+}
+
 @media (min-width: 768px) {
   .wrapper .navbar {
     padding-top: 1rem;
