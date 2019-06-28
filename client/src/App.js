@@ -24,14 +24,14 @@ const App = () => (
       <Fragment>
         <Wrapper>
           <Nav />
-          <Switch>
-            <Container className='d-flex flex-column align-content-center hero'>
+          <Container className='d-flex flex-column align-content-center hero'>
+            <Switch>
               <Route exact path='/login' component={Login} />
               <Route exact path='/signup' component={Signup} />
               <Route exact path='/' component={Landing} />
               <Route exact path='/dashboard' component={Dashboard} />
-            </Container>
-          </Switch>
+            </Switch>
+          </Container>
         </Wrapper>
       </Fragment>
     </Router>
