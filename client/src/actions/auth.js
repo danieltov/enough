@@ -31,3 +31,6 @@ export const registerUser = ({ name, email, password }) => async dispatch => {
     dispatch({ type: REGISTER_FAIL });
   }
 };
+
+// * Login User
+export const loginUser = ({ email, password }) => async dispatch => {};
