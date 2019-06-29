@@ -19,5 +19,5 @@ app.use(routes);
 connectDB();
 
 app.listen(PORT, () =>
-  console.log(`Server started on port http://localhost/${PORT}`)
+  console.log(`Server started on port http://localhost:${PORT}`)
 );

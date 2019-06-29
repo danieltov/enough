@@ -2,7 +2,6 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Wrapper from './components/Wrapper';
-import Notice from './components/Notice';
 import { EnoughNav as Nav } from './components/Navbar';
 import Container from 'react-bootstrap/Container';
 
@@ -26,7 +25,6 @@ const App = () => (
         <Wrapper>
           <Nav />
           <Container className='d-flex flex-column align-content-center hero'>
-            <Notice />
             <Switch>
               <Route exact path='/login' component={Login} />
               <Route exact path='/signup' component={Signup} />

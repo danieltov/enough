@@ -35,7 +35,7 @@ const Login = () => {
         md={6}
         className='d-flex justify-content-start align-items-center'>
         <div className='form-container'>
-          <Form validated onSubmit={e => onSubmit(e)}>
+          <Form onSubmit={e => onSubmit(e)}>
             <h2 className='text-center'>
               <strong>Login</strong> to your account.
             </h2>

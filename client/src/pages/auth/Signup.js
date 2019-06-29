@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Row, Col, Image, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { setNotice } from '../../actions/notice';
 import { registerUser } from '../../actions/auth';
+
+import { Row, Col, Image, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Notice from '../../components/Notice';
 
 // ! Note: Destructuring props | ({setNotice}) = props.setNotice.
 const Signup = ({ setNotice, registerUser }) => {
@@ -50,6 +52,7 @@ const Signup = ({ setNotice, registerUser }) => {
             <h2 className='text-center'>
               <strong>Create</strong> an account.
             </h2>
+            <Notice />
             <Form.Group>
               <Form.Control
                 type='text'
