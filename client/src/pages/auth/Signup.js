@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { Row, Col, Image, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { setNotice } from '../../actions/notice';
+import { registerUser } from '../../actions/auth';
 
 // ! Note: Destructuring props | ({setNotice}) = props.setNotice.
-const Signup = ({ setNotice }) => {
+const Signup = ({ setNotice, registerUser }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,7 +25,7 @@ const Signup = ({ setNotice }) => {
     if (password !== password2) {
       setNotice('Passwords do not match', 'danger');
     } else {
-      console.log('SUCCESS!');
+      registerUser({ name, email, password });
     }
   };
 
@@ -45,7 +46,7 @@ const Signup = ({ setNotice }) => {
         md={6}
         className='d-flex justify-content-center align-items-start'>
         <div className='form-container'>
-          <Form validated onSubmit={e => onSubmit(e)}>
+          <Form onSubmit={e => onSubmit(e)}>
             <h2 className='text-center'>
               <strong>Create</strong> an account.
             </h2>
@@ -56,7 +57,6 @@ const Signup = ({ setNotice }) => {
                 placeholder='Name'
                 value={name}
                 onChange={e => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group>
@@ -66,7 +66,6 @@ const Signup = ({ setNotice }) => {
                 placeholder='Email'
                 value={email}
                 onChange={e => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group>
@@ -76,7 +75,6 @@ const Signup = ({ setNotice }) => {
                 placeholder='Password'
                 value={password}
                 onChange={e => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group>
@@ -86,7 +84,6 @@ const Signup = ({ setNotice }) => {
                 placeholder='Password (repeat)'
                 value={password2}
                 onChange={e => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group>
@@ -105,12 +102,13 @@ const Signup = ({ setNotice }) => {
 };
 
 Signup.propTypes = {
-  setNotice: PropTypes.func.isRequired
+  setNotice: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired
 };
 
 // ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
 
 export default connect(
   null,
-  { setNotice }
+  { setNotice, registerUser }
 )(Signup);
