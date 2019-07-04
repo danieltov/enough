@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-const Aff = () => {
+const Strength = () => {
   return (
     <Row>
       <Col xs={12} className='d-flex justify-content-center align-items-center'>
@@ -36,4 +36,4 @@ const Aff = () => {
   );
 };
 
-export default Aff;
+export default Strength;
