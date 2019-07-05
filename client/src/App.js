@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Wrapper from './components/Wrapper';
-import { EnoughNav as Nav } from './components/Navbar';
+import EnoughNav from './components/Navbar';
 import Container from 'react-bootstrap/Container';
 
 // * ==================== VIEWS ==================== *//
@@ -38,7 +38,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Wrapper>
-          <Nav />
+          <EnoughNav />
           <Container className='d-flex flex-column align-content-center hero'>
             <Switch>
               <Route exact path='/' component={Landing} />

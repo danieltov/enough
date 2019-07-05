@@ -1,9 +1,43 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logoutUser } from '../../actions/auth';
+
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-export const EnoughNav = () => {
+// ! Destructuring props, de-structure auth prop <- Destructuring object within object
+const EnoughNav = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
+  const authLinks = (
+    <Nav className='ml-auto'>
+      <Link
+        onClick={logoutUser}
+        to='/'
+        className='btn ml-auto action-button border-0'>
+        <i className='fas fa-sign-out-alt' />{' '}
+        <span className='hide-sm'>Logout</span>
+      </Link>
+      <Link to='/signup' className='btn action-button ml-auto'>
+        Dashboard
+      </Link>
+      <Link to='/signup' className='btn action-button ml-auto'>
+        Profile
+      </Link>
+    </Nav>
+  );
+
+  const guestLinks = (
+    <Nav className='ml-auto'>
+      <Link to='/login' className='btn ml-auto action-button border-0'>
+        Login
+      </Link>
+      <Link to='/signup' className='btn action-button ml-auto'>
+        Sign Up
+      </Link>
+    </Nav>
+  );
+
   return (
     <Navbar expand='md'>
       <Link to='/' className='navbar-brand'>
@@ -11,15 +45,21 @@ export const EnoughNav = () => {
       </Link>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='nav'>
-        <Nav className='ml-auto'>
-          <Link to='/login' className='btn ml-auto action-button border-0'>
-            Login
-          </Link>
-          <Link to='/signup' className='btn action-button ml-auto'>
-            Sign Up
-          </Link>
-        </Nav>
+        {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
       </Navbar.Collapse>
     </Navbar>
   );
 };
+
+Navbar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(EnoughNav);
