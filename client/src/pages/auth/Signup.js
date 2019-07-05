@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { setNotice } from '../../actions/notice';
 import { registerUser } from '../../actions/auth';
 
 import { Row, Col, Image, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Notice from '../../components/Notice';
 
 // ! Note: Destructuring props | ({setNotice}) = props.setNotice.
-const Signup = ({ setNotice, registerUser }) => {
+const Signup = ({ setNotice, registerUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,16 +21,28 @@ const Signup = ({ setNotice, registerUser }) => {
   const { name, email, password, password2 } = formData;
 
   const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
 
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
       setNotice('Passwords do not match', 'danger');
     } else {
-      registerUser({ name, email, password });
+      registerUser({
+        name,
+        email,
+        password
+      });
     }
   };
+
+  // * Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <Row>
@@ -106,12 +119,17 @@ const Signup = ({ setNotice, registerUser }) => {
 
 Signup.propTypes = {
   setNotice: PropTypes.func.isRequired,
-  registerUser: PropTypes.func.isRequired
+  registerUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 };
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
 
 // ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
 
 export default connect(
-  null,
+  mapStateToProps,
   { setNotice, registerUser }
 )(Signup);

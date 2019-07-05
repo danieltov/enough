@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
-import { Row, Col, Image, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const Login = () => {
+import { loginUser } from '../../actions/auth';
+import { setNotice } from '../../actions/notice';
+
+import { Row, Col, Image, Form, Button } from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom';
+import Notice from '../../components/Notice';
+
+const Login = ({ loginUser, isAuthenticated, setNotice }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -15,8 +22,13 @@ const Login = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log('SUCCESS');
+    loginUser(email, password);
   };
+
+  // * Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <Row>
@@ -39,6 +51,7 @@ const Login = () => {
             <h2 className='text-center'>
               <strong>Login</strong> to your account.
             </h2>
+            <Notice />
             <Form.Group>
               <Form.Control
                 type='email'
@@ -74,4 +87,19 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  setNotice: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+// ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
+
+export default connect(
+  mapStateToProps,
+  { loginUser, setNotice }
+)(Login);

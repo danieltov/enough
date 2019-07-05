@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 import { SET_NOTICE, REMOVE_NOTICE } from './types';
 
-export const setNotice = (msg, noticeType, timeout = 5000) => dispatch => {
+export const setNotice = (msg, noticeType, timeout = 2000) => dispatch => {
   // ! Note: "dispatch" is thunk middleware!
   const id = uuid.v4();
 
