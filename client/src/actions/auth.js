@@ -5,6 +5,7 @@ import {
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGOUT,
   USER_LOADED,
   AUTH_ERROR
 } from './types';
@@ -61,7 +62,6 @@ export const registerUser = ({ name, email, password }) => async dispatch => {
 };
 
 // * Login User
-// * Register User
 export const loginUser = (email, password) => async dispatch => {
   // ! Set headers for http request
   const config = {
@@ -90,4 +90,9 @@ export const loginUser = (email, password) => async dispatch => {
     // ! Dispatch LOGIN_FAIL to the auth reducer
     dispatch({ type: LOGIN_FAIL });
   }
+};
+
+// * Logout User
+export const logoutUser = () => async dispatch => {
+  dispatch({ type: LOGOUT });
 };
