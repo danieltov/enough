@@ -23,6 +23,7 @@ const Login = ({ loginUser, isAuthenticated, setNotice }) => {
   const onSubmit = e => {
     e.preventDefault();
     loginUser(email, password);
+    document.getElementById('password').value = '';
   };
 
   // * Redirect if logged in
@@ -66,6 +67,7 @@ const Login = ({ loginUser, isAuthenticated, setNotice }) => {
               <Form.Control
                 type='password'
                 name='password'
+                id='password'
                 placeholder='Password'
                 value={password}
                 onChange={e => onChange(e)}

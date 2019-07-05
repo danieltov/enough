@@ -37,6 +37,8 @@ const Signup = ({ setNotice, registerUser, isAuthenticated }) => {
         password
       });
     }
+    document.getElementById('password').value = '';
+    document.getElementById('password2').value = '';
   };
 
   // * Redirect if logged in
@@ -89,6 +91,7 @@ const Signup = ({ setNotice, registerUser, isAuthenticated }) => {
                 type='password'
                 name='password'
                 placeholder='Password'
+                id='password'
                 value={password}
                 onChange={e => onChange(e)}
               />
@@ -97,6 +100,7 @@ const Signup = ({ setNotice, registerUser, isAuthenticated }) => {
               <Form.Control
                 type='password'
                 name='password2'
+                id='password2'
                 placeholder='Password (repeat)'
                 value={password2}
                 onChange={e => onChange(e)}

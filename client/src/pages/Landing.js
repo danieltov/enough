@@ -48,6 +48,7 @@ Landing.propTypes = {
   isAuthenticated: PropTypes.bool
 };
 
+// ! Get the information from state that we need from our reducer
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
