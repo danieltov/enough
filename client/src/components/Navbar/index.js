@@ -15,10 +15,11 @@ const EnoughNav = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
         onClick={logoutUser}
         to='/'
         className='btn ml-auto action-button border-0'>
-        <i className='fas fa-sign-out-alt' />{' '}
-        <span className='hide-sm'>Logout</span>
+        <i className='fas fa-sign-out-alt' /> Logout
       </Link>
-      <Link to='/signup' className='btn action-button ml-auto'>
+      <Link
+        to='/signup'
+        className='btn action-button my-1 my-md-0 mr-md-2 ml-auto'>
         Dashboard
       </Link>
       <Link to='/signup' className='btn action-button ml-auto'>

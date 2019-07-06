@@ -1,6 +1,7 @@
 // * ==================== REACT COMPONENTS ==================== *//
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PrivateRoute from './components/routing/PrivateRoute';
 import Wrapper from './components/Wrapper';
 import EnoughNav from './components/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -9,8 +10,8 @@ import Container from 'react-bootstrap/Container';
 import Landing from './pages/Landing';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
-import Dashboard from './pages/Dashboard';
-import Aff from './pages/aff/Achievement';
+import Dashboard from './pages/dashboard/Dashboard';
+import Aff from './pages/dashboard/aff/Achievement';
 
 // * ==================== REDUX ==================== *//
 import { Provider } from 'react-redux';
@@ -44,8 +45,8 @@ const App = () => {
               <Route exact path='/' component={Landing} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/signup' component={Signup} />
-              <Route exact path='/dashboard' component={Dashboard} />
-              <Route exact path='/aff' component={Aff} />
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute exact path='/aff' component={Aff} />
             </Switch>
           </Container>
         </Wrapper>
