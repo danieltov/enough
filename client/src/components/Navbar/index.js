@@ -18,11 +18,11 @@ const EnoughNav = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
         <i className='fas fa-sign-out-alt' /> Logout
       </Link>
       <Link
-        to='/signup'
+        to='/dashboard'
         className='btn action-button my-1 my-md-0 mr-md-2 ml-auto'>
         Dashboard
       </Link>
-      <Link to='/signup' className='btn action-button ml-auto'>
+      <Link to='/profile' className='btn action-button ml-auto'>
         Profile
       </Link>
     </Nav>
@@ -31,7 +31,8 @@ const EnoughNav = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   const guestLinks = (
     <Nav className='ml-auto'>
       <Link to='/login' className='btn ml-auto action-button border-0'>
-        Login
+        <i className='fas fa-sign-in-alt' />
+        &nbsp; Login
       </Link>
       <Link to='/signup' className='btn action-button ml-auto'>
         Sign Up
