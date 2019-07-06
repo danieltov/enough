@@ -1,13 +1,13 @@
 // * ==================== SERVER SETUP ==================== *//
 const express = require('express');
-const morgan = require('morgan');
+const logger = require('morgan');
 const connectDB = require('./config/db');
 const app = express();
 const routes = require('./routes');
 const PORT = process.env.PORT || 5001;
-morgan('tiny');
 
 // * ==================== MIDDLEWARE ==================== *//
+app.use(logger('dev'));
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 // * Serve up static assets
