@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setNotice } from './notice';
 import { ADD_AFF_SUCCESS, ADD_AFF_FAIL } from './types';
-import { loadUser } from './actions/auth';
+import { loadUser } from './auth';
 import setAuthToken from '../utils/setAuthToken';
 
 // * Create New Affirmationn
@@ -32,13 +32,15 @@ export const newAffirmation = ({
   if (dateAchieved) body.dateAchieved = dateAchieved;
   if (madeMeFeel) body.madeMeFeel = madeMeFeel;
 
-  body = JSON.stringify(body);
+  console.log(body);
+  const jsonBody = JSON.stringify(body);
+  console.log(jsonBody);
 
   try {
     if (body.madeMeFeel) {
-      var res = await axios.post('/api/aff/achievement', body, config);
+      var res = await axios.post('/api/aff/achievement', jsonBody, config);
     } else {
-      var res = await axios.post('/api/aff', body, config);
+      res = await axios.post('/api/aff', jsonBody, config);
     }
 
     dispatch({ type: ADD_AFF_SUCCESS, payload: res.data });
