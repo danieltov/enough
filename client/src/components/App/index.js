@@ -1,23 +1,23 @@
 // * ==================== REACT COMPONENTS ==================== *//
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PrivateRoute from './components/routing/PrivateRoute';
-import Wrapper from './components/Wrapper';
-import EnoughNav from './components/Navbar';
+import PrivateRoute from '../routing/PrivateRoute';
+import Wrapper from '../Wrapper';
+import EnoughNav from '../Navbar';
 import Container from 'react-bootstrap/Container';
 
 // * ==================== VIEWS ==================== *//
-import Landing from './pages/Landing';
-import Login from './pages/auth/Login';
-import Signup from './pages/auth/Signup';
-import Dashboard from './pages/dashboard/Dashboard';
-import Affirmation from './pages/dashboard/Affirmation';
+import Landing from '../pages/guest/Landing';
+import Login from '../pages/guest/Login';
+import Signup from '../pages/guest/Signup';
+import Dashboard from '../pages/user/Dashboard';
+import Affirmation from '../pages/user/Affirmation';
 
 // * ==================== REDUX ==================== *//
 import { Provider } from 'react-redux';
-import store from './store';
-import { loadUser } from './actions/auth';
-import setAuthToken from './utils/setAuthToken';
+import store from '../../store';
+import { loadUser } from '../../actions/auth';
+import setAuthToken from '../../utils/setAuthToken';
 
 // * ==================== STYLES ==================== *//
 import './App.css';

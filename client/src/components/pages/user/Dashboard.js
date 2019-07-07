@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const Dashboard = props => {
+const Dashboard = ({ user }) => {
   return (
     <Row>
       <Col xs={12}>
@@ -36,6 +36,15 @@ const Dashboard = props => {
   );
 };
 
-Dashboard.propTypes = {};
+Dashboard.propTypes = {
+  user: PropTypes.object.isRequired
+};
 
-export default Dashboard;
+// ! Get the information from state that we need from our reducer
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+// ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
+
+export default connect(mapStateToProps)(Dashboard);

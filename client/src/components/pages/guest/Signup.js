@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { setNotice } from '../../actions/notice';
-import { registerUser } from '../../actions/auth';
+import { setNotice } from '../../../actions/notice';
+import { registerUser } from '../../../actions/auth';
 
 import { Row, Col, Image, Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
-import Notice from '../../components/Notice';
+import Notice from '../../Notice';
 
-// ! Note: Destructuring props | ({setNotice}) = props.setNotice.
 const Signup = ({ setNotice, registerUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',

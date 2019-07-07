@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { loginUser } from '../../actions/auth';
-import { setNotice } from '../../actions/notice';
+import { loginUser } from '../../../actions/auth';
+import { setNotice } from '../../../actions/notice';
 
 import { Row, Col, Image, Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
-import Notice from '../../components/Notice';
+import Notice from '../../Notice';
 
 const Login = ({ loginUser, isAuthenticated, setNotice }) => {
   const [formData, setFormData] = useState({
