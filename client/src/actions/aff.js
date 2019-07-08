@@ -13,7 +13,8 @@ export const newAffirmation = ({
   affirmationType,
   title,
   dateAchieved,
-  madeMeFeel
+  madeMeFeel,
+  author
 }) => async dispatch => {
   if (localStorage.token) setAuthToken(localStorage.token);
 
@@ -31,10 +32,9 @@ export const newAffirmation = ({
   if (title) body.title = title;
   if (dateAchieved) body.dateAchieved = dateAchieved;
   if (madeMeFeel) body.madeMeFeel = madeMeFeel;
+  if (author) body.author = author;
 
-  console.log(body);
   const jsonBody = JSON.stringify(body);
-  console.log(jsonBody);
 
   try {
     if (body.madeMeFeel) {
