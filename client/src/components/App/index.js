@@ -11,7 +11,7 @@ import Landing from '../pages/guest/Landing';
 import Login from '../pages/guest/Login';
 import Signup from '../pages/guest/Signup';
 import Dashboard from '../pages/user/Dashboard';
-import Achievement from '../pages/user/affirmations/Achievement';
+import Affirmation from '../pages/user/Affirmation';
 
 // * ==================== REDUX ==================== *//
 import { Provider } from 'react-redux';
@@ -46,7 +46,8 @@ const App = () => {
               <Route exact path='/login' component={Login} />
               <Route exact path='/signup' component={Signup} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
-              <PrivateRoute exact path='/affirm' component={Achievement} />
+              <PrivateRoute exact path='/affirm' component={''} />
+              <PrivateRoute exact path='/affirmation' component={Affirmation} />
             </Switch>
           </Container>
         </Wrapper>
