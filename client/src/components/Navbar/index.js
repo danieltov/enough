@@ -54,9 +54,10 @@ const EnoughNav = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
 };
 
 Navbar.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  logoutUser: PropTypes.func,
+  auth: PropTypes.object
 };
+
 const mapStateToProps = state => ({
   auth: state.auth
 });
