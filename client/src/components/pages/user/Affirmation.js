@@ -65,13 +65,27 @@ const Affirmation = ({
     </>
   );
 
+  const quote = (text, image, author) => (
+    <>
+      <Card.Title>
+        <h2>
+          Here's one of your <strong>favorite quotes</strong> to brighten up
+          your day.
+        </h2>
+      </Card.Title>
+      <Card.Text>
+        {text} <br /> &mdash;{author}
+      </Card.Text>
+    </>
+  );
+
   return (
     <>
       <Card body>
         {affirmationType !== 'achievement' && affirmationType !== 'quote'
           ? strOrGrat(affirmationType, text, image)
           : affirmationType !== 'achievement'
-          ? 'quote'
+          ? quote(text, image, author)
           : 'achievement'}
       </Card>
       <>{image && <Card.Img variant='bottom' />}</>
