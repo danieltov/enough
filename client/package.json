@@ -1,5 +1,5 @@
 {
-  "name": "you-are-enough",
+  "name": "enough",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +16,9 @@
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "use-react-router": "^1.0.7",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,5 +40,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5001"
 }

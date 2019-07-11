@@ -164,7 +164,9 @@ body {
 
 .hero form .btn-primary:hover,
 .hero form .btn-primary:active {
-  background: #1336bf;
+  background: #fcde23 !important;
+  color: #505e6c;
+  transform: 600ms ease all;
 }
 
 .hero form .btn-primary:active {

@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
-import { Row, Col, Image, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-const Signup = () => {
+import { setNotice } from '../../../actions/notice';
+import { registerUser } from '../../../actions/auth';
+
+import { Row, Col, Image, Form, Button } from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom';
+import Notice from '../../Notice';
+
+const Signup = ({ setNotice, registerUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,16 +20,30 @@ const Signup = () => {
   const { name, email, password, password2 } = formData;
 
   const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
 
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('Passwords do not match!');
+      setNotice('Passwords do not match', 'danger');
     } else {
-      console.log('SUCCESS!');
+      registerUser({
+        name,
+        email,
+        password
+      });
     }
+    document.getElementById('password').value = '';
+    document.getElementById('password2').value = '';
   };
+
+  // * Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <Row>
@@ -41,10 +62,11 @@ const Signup = () => {
         md={6}
         className='d-flex justify-content-center align-items-start'>
         <div className='form-container'>
-          <Form validated onSubmit={e => onSubmit(e)}>
+          <Form onSubmit={e => onSubmit(e)}>
             <h2 className='text-center'>
               <strong>Create</strong> an account.
             </h2>
+            <Notice />
             <Form.Group>
               <Form.Control
                 type='text'
@@ -52,7 +74,6 @@ const Signup = () => {
                 placeholder='Name'
                 value={name}
                 onChange={e => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group>
@@ -62,7 +83,6 @@ const Signup = () => {
                 placeholder='Email'
                 value={email}
                 onChange={e => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group>
@@ -70,19 +90,19 @@ const Signup = () => {
                 type='password'
                 name='password'
                 placeholder='Password'
+                id='password'
                 value={password}
                 onChange={e => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group>
               <Form.Control
                 type='password'
                 name='password2'
+                id='password2'
                 placeholder='Password (repeat)'
                 value={password2}
                 onChange={e => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group>
@@ -100,4 +120,19 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+Signup.propTypes = {
+  setNotice: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+// ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
+
+export default connect(
+  mapStateToProps,
+  { setNotice, registerUser }
+)(Signup);
