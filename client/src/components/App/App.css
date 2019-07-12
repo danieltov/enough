@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400i&display=swap');
+
 html {
   height: 100%;
 }
@@ -40,10 +42,46 @@ body {
   font-weight: 300;
 }
 
+/* ===== AFFIRMATION STYLES ===== */
+
 .card {
   border-radius: 10px;
   border: transparent;
   box-shadow: 8px 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+.card .card-text {
+  margin-top: 30px;
+}
+
+.card .card-body {
+  padding: 50px;
+}
+
+.card-body h2 {
+  text-align: center;
+}
+
+.card .card-img-bottom {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  max-height: 250px;
+  object-fit: cover;
+}
+
+.strGratCard {
+  background-color: #fcde23;
+}
+
+.strGratCard p {
+  color: #292929;
+}
+
+.card .quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  text-align: center;
+  margin-top: 30px;
 }
 
 .hero .form-container {
@@ -172,7 +210,6 @@ body {
 
   .hero {
     width: 70%;
-    margin: 10rem auto;
   }
 
   .hero h1 {
@@ -183,5 +220,9 @@ body {
 
   .hero form {
     padding: 40px 60px;
+  }
+
+  .card .quote {
+    font-size: 60px;
   }
 }

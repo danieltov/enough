@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card, CardDeck } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Affirmation = ({
@@ -30,13 +30,11 @@ const Affirmation = ({
   };
   shuffler(masterArray);
 
-  // TODO Populate component with first element from array
-
   // * Destructure affirmation object
   const {
     text,
-    image,
     affirmationType,
+    author,
     title,
     dateAchieved,
     madeMeFeel
@@ -44,51 +42,80 @@ const Affirmation = ({
 
   console.log(affirmationType);
 
-  const strOrGrat = (affirmationType, text, image) => (
+  const strOrGrat = (affirmationType, text) => (
     <>
-      <Card.Title>
-        {affirmationType === 'strength' ? (
-          <h2 style={{ textAlign: 'center', color: '#292929' }}>
-            You may not feel it now but remember, you are{' '}
-            <strong>strong</strong> enough.
-          </h2>
-        ) : (
-          <h2>
-            It may not feel like it now, but try to remember what you're
-            <strong>grateful</strong> for.
-          </h2>
-        )}
-      </Card.Title>
-      <Card.Text style={{ color: '#292929' }}>
-        <em>On a better day, you asked us to remind you:</em> "{text}"
-      </Card.Text>
+      <Card className='strGratCard'>
+        <Card.Body>
+          <Card.Title>
+            {affirmationType === 'strength' ? (
+              <h2>
+                You may not feel it now but remember, you are{' '}
+                <strong>strong</strong> enough.
+              </h2>
+            ) : (
+              <h2>
+                It may not feel like it now, but try to remember what you're
+                <strong>grateful</strong> for.
+              </h2>
+            )}
+          </Card.Title>
+          <Card.Text>
+            <em>On a better day, you told us this:</em>
+            <p className='quote'>&ldquo;{text}&rdquo;</p>
+          </Card.Text>
+        </Card.Body>
+        <Card.Img
+          variant='bottom'
+          src={
+            'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg'
+          }
+        />
+      </Card>
     </>
   );
 
-  const quote = (text, image, author) => (
+  const quote = (text, author) => (
+    <>
+      <Card className='quoteCard'>
+        <Card.Body>
+          <Card.Title>
+            <h2>
+              Here's one of your <strong>favorite quotes</strong> to brighten up
+              your day.
+            </h2>
+          </Card.Title>
+          <Card.Text>
+            {text} <br /> &mdash;{author}
+          </Card.Text>
+        </Card.Body>
+        <Card.Img
+          variant='bottom'
+          src={
+            'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg'
+          }
+        />
+      </Card>
+    </>
+  );
+
+  const achievement = (text, title, dateAchieved, madeMeFeel) => (
     <>
       <Card.Title>
         <h2>
-          Here's one of your <strong>favorite quotes</strong> to brighten up
-          your day.
+          Don't forget about your <strong>achievements</strong>. Remember this
+          one?
         </h2>
       </Card.Title>
-      <Card.Text>
-        {text} <br /> &mdash;{author}
-      </Card.Text>
     </>
   );
 
   return (
     <>
-      <Card body>
-        {affirmationType !== 'achievement' && affirmationType !== 'quote'
-          ? strOrGrat(affirmationType, text, image)
-          : affirmationType !== 'achievement'
-          ? quote(text, image, author)
-          : 'achievement'}
-      </Card>
-      <>{image && <Card.Img variant='bottom' />}</>
+      {affirmationType !== 'achievement' && affirmationType !== 'quote'
+        ? strOrGrat(affirmationType, text)
+        : affirmationType !== 'achievement'
+        ? quote(text, author)
+        : 'achievement'}
     </>
   );
 };
