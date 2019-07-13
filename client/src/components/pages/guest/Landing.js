@@ -23,13 +23,10 @@ const Landing = ({ isAuthenticated }) => {
         </h1>
         <p>
           An app to store your accomplishments, strengths, and other positives
-          in your life. When you need it most, we'll remind you that
+          in your life. When you need it most, we'll remind you that{' '}
           <strong>you are enough. We have the receipts.</strong>
         </p>
-        <Link
-          to='/signup'
-          className='btn btn-light btn-lg action-button'
-          type='button'>
+        <Link to='/signup' className='btn btn-lg action-button'>
           Sign Up
         </Link>
       </Col>
