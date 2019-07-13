@@ -16,14 +16,13 @@ module.exports = {
     }
 
     // * Destructure req.body
-    const { text, image, dateAdded, author, affirmationType } = req.body;
+    const { text, dateAdded, author, affirmationType } = req.body;
 
     // * Build affirmation object
     const affirmationFields = {};
     affirmationFields.user = req.user.id;
     affirmationFields.text = text;
     affirmationFields.affirmationType = affirmationType;
-    if (image) affirmationFields.image = image;
     if (dateAdded) affirmationFields.dateAdded = dateAdded;
     if (author) affirmationFields.author = author;
 
@@ -38,7 +37,8 @@ module.exports = {
           },
           {
             $push: {
-              'affirmations.gratitudes': gratitude._id
+              'affirmations.gratitudes': gratitude._id,
+              $inc: { 'affirmations.count': 1 }
             }
           },
           {
@@ -56,10 +56,12 @@ module.exports = {
           {
             _id: affirmationFields.user
           },
+
           {
             $push: {
               'affirmations.quotes': quote._id
-            }
+            },
+            $inc: { 'affirmations.count': 1 }
           },
           {
             new: true
@@ -74,7 +76,10 @@ module.exports = {
         await strength.save();
         const user = await DB.User.findOneAndUpdate(
           { _id: affirmationFields.user },
-          { $push: { 'affirmations.strengths': strength._id } },
+          {
+            $push: { 'affirmations.strengths': strength._id },
+            $inc: { 'affirmations.count': 1 }
+          },
           { new: true }
         );
         return res.json({
@@ -100,7 +105,6 @@ module.exports = {
     // * Destructure req.body
     const {
       text,
-      image,
       dateAdded,
       affirmationType,
       title,
@@ -117,7 +121,6 @@ module.exports = {
     affirmationFields.title = title;
     affirmationFields.dateAchieved = dateAchieved;
     affirmationFields.madeMeFeel = madeMeFeel;
-    if (image) affirmationFields.image = image;
 
     // * Add affirmationFields to model
     try {
@@ -137,7 +140,8 @@ module.exports = {
         {
           $push: {
             'affirmations.achievements': achievement._id
-          }
+          },
+          $inc: { 'affirmations.count': 1 }
         },
         {
           new: true
