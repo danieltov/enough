@@ -86,7 +86,7 @@ const Achievement = ({ newAffirmation, setNotice, count }) => {
               />
             </Form.Group>
             <Form.Label>
-              <Form.Label for='dateAchieved'>Date Achieved:</Form.Label>
+              <Form.Label htmlFor='dateAchieved'>Date Achieved:</Form.Label>
               <Form.Control
                 type='date'
                 name='dateAchieved'

@@ -147,12 +147,7 @@ const Affirmation = ({
         ? strOrGrat(affirmationType, text)
         : affirmationType !== 'achievement'
         ? quote(text, author)
-        : achievement(
-            'Ultrices dui sapien eget mi proin sed',
-            'Sed vulputate odio ut enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in dictum non consectetur a erat nam at lectus urna',
-            dateAchieved,
-            'Mauris cursus mattis molestie a iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui'
-          )}
+        : achievement(title, text, dateAchieved, madeMeFeel)}
     </>
   );
 };

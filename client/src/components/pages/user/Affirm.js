@@ -11,48 +11,6 @@ import Strength from './Forms/Strength';
 import Gratitude from './Forms/Gratitude';
 
 const Affirm = ({ newAffirmation, setNotice }) => {
-  const [formData, setFormData] = useState({
-    text: '',
-    image: '',
-    dateAdded: '',
-    affirmationType: 'achievement',
-    title: '',
-    dateAchieved: '',
-    madeMeFeel: ''
-  });
-
-  const {
-    text,
-    image,
-    dateAdded,
-    affirmationType,
-    title,
-    dateAchieved,
-    madeMeFeel,
-    author
-  } = formData;
-
-  const onChange = e =>
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-
-  const onSubmit = e => {
-    e.preventDefault();
-    console.log(formData);
-    newAffirmation({
-      text,
-      image,
-      dateAdded,
-      affirmationType,
-      title,
-      dateAchieved,
-      madeMeFeel,
-      author
-    });
-  };
-
   const [randComp, setRandComp] = useState();
 
   useEffect(() => {
