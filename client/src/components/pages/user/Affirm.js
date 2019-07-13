@@ -5,9 +5,6 @@ import { connect } from 'react-redux';
 import { newAffirmation } from '../../../actions/aff';
 import { setNotice } from '../../../actions/notice';
 
-import { Row, Col, Form, Button } from 'react-bootstrap';
-import Notice from '../../Notice';
-
 import Achievement from './Forms/Achievement';
 import Quote from './Forms/Achievement';
 import Strength from './Forms/Strength';
@@ -36,7 +33,10 @@ const Affirm = ({ newAffirmation, setNotice }) => {
   } = formData;
 
   const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
 
   const onSubmit = e => {
     e.preventDefault();
