@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-const Dashboard = () => {
+const Dashboard = ({ count }) => {
+  // * Redirect affirmation count is 0
+  if (!count) return <Redirect to='/affirm' />;
+
   return (
     <Row>
       <Col xs={12}>
@@ -41,12 +44,12 @@ const Dashboard = () => {
 };
 
 Dashboard.propTypes = {
-  user: PropTypes.object
+  count: PropTypes.number.isRequired
 };
 
 // ! Get the information from state that we need from our reducer
 const mapStateToProps = state => ({
-  user: state.auth.user
+  count: state.auth.user.affirmations.count
 });
 
 // ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
