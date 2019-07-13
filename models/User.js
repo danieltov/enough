@@ -14,7 +14,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  affirmations: [, , ,],
   affirmations: {
     achievements: [
       {
@@ -39,11 +38,12 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'strength'
       }
-    ]
-  },
-  favoriteAnimal: {
-    type: String,
-    required: false
+    ],
+    count: {
+      type: Number,
+      required: true,
+      default: 0
+    }
   }
 });
 module.exports = User = mongoose.model('user', UserSchema, 'users');
