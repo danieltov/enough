@@ -11,9 +11,6 @@ const BaseAffirmationSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    image: {
-      type: String
-    },
     dateAdded: {
       type: Date,
       default: Date.now

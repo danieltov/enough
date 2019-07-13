@@ -16,14 +16,13 @@ module.exports = {
     }
 
     // * Destructure req.body
-    const { text, image, dateAdded, author, affirmationType } = req.body;
+    const { text, dateAdded, author, affirmationType } = req.body;
 
     // * Build affirmation object
     const affirmationFields = {};
     affirmationFields.user = req.user.id;
     affirmationFields.text = text;
     affirmationFields.affirmationType = affirmationType;
-    if (image) affirmationFields.image = image;
     if (dateAdded) affirmationFields.dateAdded = dateAdded;
     if (author) affirmationFields.author = author;
 
@@ -100,7 +99,6 @@ module.exports = {
     // * Destructure req.body
     const {
       text,
-      image,
       dateAdded,
       affirmationType,
       title,
@@ -117,7 +115,6 @@ module.exports = {
     affirmationFields.title = title;
     affirmationFields.dateAchieved = dateAchieved;
     affirmationFields.madeMeFeel = madeMeFeel;
-    if (image) affirmationFields.image = image;
 
     // * Add affirmationFields to model
     try {
