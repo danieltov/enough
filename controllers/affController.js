@@ -37,7 +37,8 @@ module.exports = {
           },
           {
             $push: {
-              'affirmations.gratitudes': gratitude._id
+              'affirmations.gratitudes': gratitude._id,
+              $inc: { 'affirmations.count': 1 }
             }
           },
           {
@@ -55,10 +56,12 @@ module.exports = {
           {
             _id: affirmationFields.user
           },
+
           {
             $push: {
               'affirmations.quotes': quote._id
-            }
+            },
+            $inc: { 'affirmations.count': 1 }
           },
           {
             new: true
@@ -73,7 +76,10 @@ module.exports = {
         await strength.save();
         const user = await DB.User.findOneAndUpdate(
           { _id: affirmationFields.user },
-          { $push: { 'affirmations.strengths': strength._id } },
+          {
+            $push: { 'affirmations.strengths': strength._id },
+            $inc: { 'affirmations.count': 1 }
+          },
           { new: true }
         );
         return res.json({
@@ -134,7 +140,8 @@ module.exports = {
         {
           $push: {
             'affirmations.achievements': achievement._id
-          }
+          },
+          $inc: { 'affirmations.count': 1 }
         },
         {
           new: true
