@@ -76,18 +76,7 @@ const Gratitude = ({ newAffirmation, setNotice, count }) => {
                 value={text}
               />
             </Form.Group>
-            <Form.Group className='my-2 custom-file'>
-              <Form.Control
-                type='file'
-                className='custom-file-input'
-                onChange={e => onChange(e)}
-                value={image}
-                id='customFile'
-              />
-              <Form.Label className='custom-file-label' for='customFile'>
-                Optionally, upload a photo
-              </Form.Label>
-            </Form.Group>
+
             <Form.Group>
               <Button variant='primary' type='submit' block>
                 Save
