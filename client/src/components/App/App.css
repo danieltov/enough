@@ -69,6 +69,37 @@ body {
   object-fit: cover;
 }
 
+.achievementCard {
+  background-color: #bd378c;
+}
+
+.achievementCard p,
+.achievementCard h2 {
+  color: white;
+}
+
+.achievementCard p {
+  margin: 15px 0;
+}
+
+.achievementCard h2 {
+  font-size: 1.9rem;
+}
+
+.card .achievement.title {
+  font-size: 36px;
+}
+
+.card .achievement.date {
+  font-style: italic;
+  font-size: 0.75em;
+}
+
+.card .achievement.text {
+  font-size: 1.1rem;
+  text-align: left;
+}
+
 .strGratCard {
   background-color: #fcde23;
 }
@@ -77,6 +108,7 @@ body {
   color: #292929;
 }
 
+.card .achievement.title,
 .card .quote {
   font-family: 'Playfair Display', serif;
   font-size: 40px;
@@ -222,7 +254,17 @@ body {
     padding: 40px 60px;
   }
 
+  .card .achievement.title,
   .card .quote {
     font-size: 60px;
+  }
+
+  .achievementCard h2 {
+    font-size: 2rem;
+  }
+
+  .card .achievement.text {
+    font-size: 1.3rem;
+    text-align: left;
   }
 }

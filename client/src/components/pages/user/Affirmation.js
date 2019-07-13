@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Row, Col, Card, CardDeck } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Row, Col, Card } from 'react-bootstrap';
+import Moment from 'react-moment';
 
 const Affirmation = ({
   affirmations: { achievements, quotes, strengths, gratitudes }
@@ -85,7 +85,9 @@ const Affirmation = ({
             </h2>
           </Card.Title>
           <Card.Text>
-            {text} <br /> &mdash;{author}
+            <p className='quote'>
+              &ldquo;{text}&rdquo; <br /> &mdash;{author}
+            </p>
           </Card.Text>
         </Card.Body>
         <Card.Img
@@ -98,14 +100,44 @@ const Affirmation = ({
     </>
   );
 
-  const achievement = (text, title, dateAchieved, madeMeFeel) => (
+  const achievement = (title, text, dateAchieved, madeMeFeel) => (
     <>
-      <Card.Title>
-        <h2>
-          Don't forget about your <strong>achievements</strong>. Remember this
-          one?
-        </h2>
-      </Card.Title>
+      <Card className='achievementCard'>
+        <Card.Body>
+          <Card.Title>
+            <h2>
+              Look back at your <strong>accomplishments</strong>.
+            </h2>
+          </Card.Title>
+          <Card.Text>
+            <p>
+              <em>Remember this one?</em>
+            </p>
+            <p className='achievement title'>&ldquo;{title}&rdquo;</p>
+            <p className='achievement date'>
+              on <Moment format='MMMM DD, YYYY'>{dateAchieved}</Moment>
+            </p>
+            <Row>
+              <Col xs={12} md={6}>
+                <p className='achievement text'>
+                  What you said about it: &ldquo;{text}&rdquo;
+                </p>
+              </Col>
+              <Col xs={12} md={6}>
+                <p className='achievement text text-md-right'>
+                  How It Felt: &ldquo;{madeMeFeel}&rdquo;
+                </p>
+              </Col>
+            </Row>
+          </Card.Text>
+        </Card.Body>
+        <Card.Img
+          variant='bottom'
+          src={
+            'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg'
+          }
+        />
+      </Card>
     </>
   );
 
@@ -115,7 +147,12 @@ const Affirmation = ({
         ? strOrGrat(affirmationType, text)
         : affirmationType !== 'achievement'
         ? quote(text, author)
-        : 'achievement'}
+        : achievement(
+            'Ultrices dui sapien eget mi proin sed',
+            'Sed vulputate odio ut enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in dictum non consectetur a erat nam at lectus urna',
+            dateAchieved,
+            'Mauris cursus mattis molestie a iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui'
+          )}
     </>
   );
 };
