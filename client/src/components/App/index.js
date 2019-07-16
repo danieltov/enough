@@ -1,18 +1,10 @@
 // * ==================== REACT COMPONENTS ==================== *//
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PrivateRoute from '../routing/PrivateRoute';
 import Wrapper from '../Wrapper';
+import PrivateRoute from '../routing/PrivateRoute';
 import EnoughNav from '../Navbar';
 import Container from 'react-bootstrap/Container';
-
-// * ==================== VIEWS ==================== *//
-import Landing from '../pages/guest/Landing';
-import Login from '../pages/guest/Login';
-import Signup from '../pages/guest/Signup';
-import Dashboard from '../pages/user/Dashboard';
-import Affirmation from '../pages/user/Affirmation';
-import Affirm from '../pages/user/Affirm';
 
 // * ==================== REDUX ==================== *//
 import { Provider } from 'react-redux';
@@ -23,7 +15,49 @@ import setAuthToken from '../../utils/setAuthToken';
 // * ==================== STYLES ==================== *//
 import './App.css';
 
-// * ==================== LOGIC ==================== *//
+// * ==================== LAZY VIEWS ==================== *//
+
+const Landing = lazy(() => {
+  return Promise.all([
+    import('../pages/guest/Landing'),
+    new Promise(resolve => setTimeout(resolve, 500))
+  ]).then(([moduleExports]) => moduleExports);
+});
+
+const Login = lazy(() => {
+  return Promise.all([
+    import('../pages/guest/Login'),
+    new Promise(resolve => setTimeout(resolve, 500))
+  ]).then(([moduleExports]) => moduleExports);
+});
+
+const Signup = lazy(() => {
+  return Promise.all([
+    import('../pages/guest/Signup'),
+    new Promise(resolve => setTimeout(resolve, 500))
+  ]).then(([moduleExports]) => moduleExports);
+});
+
+const Dashboard = lazy(() => {
+  return Promise.all([
+    import('../pages/user/Dashboard'),
+    new Promise(resolve => setTimeout(resolve, 1000))
+  ]).then(([moduleExports]) => moduleExports);
+});
+
+const Affirmation = lazy(() => {
+  return Promise.all([
+    import('../pages/user/Affirmation'),
+    new Promise(resolve => setTimeout(resolve, 500))
+  ]).then(([moduleExports]) => moduleExports);
+});
+
+const Affirm = lazy(() => {
+  return Promise.all([
+    import('../pages/user/Affirm'),
+    new Promise(resolve => setTimeout(resolve, 500))
+  ]).then(([moduleExports]) => moduleExports);
+});
 
 // * Check to see if there's a token in localStorage
 if (localStorage.token) {
@@ -31,6 +65,7 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
+// * ==================== LOGIC ==================== *//
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
@@ -39,19 +74,30 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Wrapper>
-          <EnoughNav />
-          <Container className='d-flex flex-column align-content-center hero'>
-            <Switch>
-              <Route exact path='/' component={Landing} />
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/signup' component={Signup} />
-              <PrivateRoute exact path='/dashboard' component={Dashboard} />
-              <PrivateRoute exact path='/affirm' component={Affirm} />
-              <PrivateRoute exact path='/affirmation' component={Affirmation} />
-            </Switch>
-          </Container>
-        </Wrapper>
+        <Suspense
+          fallback={
+            <div className='ipl-progress-indicator' id='ipl-progress-indicator'>
+              <div className='ipl-progress-indicator-head'>
+                <div className='first-indicator' />
+                <div className='second-indicator' />
+              </div>
+              <div className='insp-logo-frame' />
+            </div>
+          }>
+          <Wrapper>
+            <EnoughNav />
+            <Container className='d-flex flex-column align-content-center hero'>
+              <Switch>
+                <Route exact path='/' component={Landing} />
+                <Route path='/login' component={Login} />
+                <Route path='/signup' component={Signup} />
+                <PrivateRoute path='/dashboard' component={Dashboard} />
+                <PrivateRoute path='/affirm' component={Affirm} />
+                <PrivateRoute path='/affirmation' component={Affirmation} />
+              </Switch>
+            </Container>
+          </Wrapper>
+        </Suspense>
       </Router>
     </Provider>
   );

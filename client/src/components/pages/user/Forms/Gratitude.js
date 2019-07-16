@@ -8,7 +8,7 @@ import { setNotice } from '../../../../actions/notice';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
-const Gratitude = ({ newAffirmation, setNotice }) => {
+const Gratitude = ({ newAffirmation, setNotice, count }) => {
   const [formData, setFormData] = useState({
     text: '',
     image: '',
@@ -54,7 +54,8 @@ const Gratitude = ({ newAffirmation, setNotice }) => {
         <div className='form-container'>
           <Form onSubmit={e => onSubmit(e)}>
             <h2 className='text-center'>
-              What is one thing you're <strong>grateful</strong> for?
+              {!count ? 'Enter your first affirmation! ' : ''}What is one thing
+              you're <strong>grateful</strong> for?
             </h2>
             <Notice />
             <Form.Group>
@@ -75,18 +76,7 @@ const Gratitude = ({ newAffirmation, setNotice }) => {
                 value={text}
               />
             </Form.Group>
-            <Form.Group className='my-2 custom-file'>
-              <Form.Control
-                type='file'
-                className='custom-file-input'
-                onChange={e => onChange(e)}
-                value={image}
-                id='customFile'
-              />
-              <Form.Label className='custom-file-label' for='customFile'>
-                Optionally, upload a photo
-              </Form.Label>
-            </Form.Group>
+
             <Form.Group>
               <Button variant='primary' type='submit' block>
                 Save
@@ -102,12 +92,14 @@ const Gratitude = ({ newAffirmation, setNotice }) => {
 Gratitude.propTypes = {
   user: PropTypes.object.isRequired,
   newAffirmation: PropTypes.func.isRequired,
-  setNotice: PropTypes.func.isRequired
+  setNotice: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired
 };
 
 // ! Get the information from state that we need from our reducer
 const mapStateToProps = state => ({
-  user: state.auth.user
+  user: state.auth.user,
+  count: state.auth.user.affirmations.count
 });
 
 // ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions.

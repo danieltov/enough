@@ -26,9 +26,11 @@ const Landing = ({ isAuthenticated }) => {
           in your life. When you need it most, we'll remind you that{' '}
           <strong>you are enough. We have the receipts.</strong>
         </p>
-        <Link to='/signup' className='btn btn-lg action-button'>
-          Sign Up
-        </Link>
+        <p>
+          <Link to='/signup' className='btn btn-lg action-button'>
+            Sign Up
+          </Link>
+        </p>
       </Col>
       <Col xs={12} md={5} lg={5} className='offset-lg-1 offset-xl-0 d-sm-block'>
         <Image
@@ -45,11 +47,8 @@ Landing.propTypes = {
   isAuthenticated: PropTypes.bool
 };
 
-// ! Get the information from state that we need from our reducer
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
-
-// ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
 
 export default connect(mapStateToProps)(Landing);
