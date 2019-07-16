@@ -20,21 +20,21 @@ import './App.css';
 const Landing = lazy(() => {
   return Promise.all([
     import('../pages/guest/Landing'),
-    new Promise(resolve => setTimeout(resolve, 1000))
+    new Promise(resolve => setTimeout(resolve, 500))
   ]).then(([moduleExports]) => moduleExports);
 });
 
 const Login = lazy(() => {
   return Promise.all([
     import('../pages/guest/Login'),
-    new Promise(resolve => setTimeout(resolve, 1000))
+    new Promise(resolve => setTimeout(resolve, 500))
   ]).then(([moduleExports]) => moduleExports);
 });
 
 const Signup = lazy(() => {
   return Promise.all([
     import('../pages/guest/Signup'),
-    new Promise(resolve => setTimeout(resolve, 1000))
+    new Promise(resolve => setTimeout(resolve, 500))
   ]).then(([moduleExports]) => moduleExports);
 });
 
@@ -48,14 +48,14 @@ const Dashboard = lazy(() => {
 const Affirmation = lazy(() => {
   return Promise.all([
     import('../pages/user/Affirmation'),
-    new Promise(resolve => setTimeout(resolve, 1000))
+    new Promise(resolve => setTimeout(resolve, 500))
   ]).then(([moduleExports]) => moduleExports);
 });
 
 const Affirm = lazy(() => {
   return Promise.all([
     import('../pages/user/Affirm'),
-    new Promise(resolve => setTimeout(resolve, 1000))
+    new Promise(resolve => setTimeout(resolve, 500))
   ]).then(([moduleExports]) => moduleExports);
 });
 
