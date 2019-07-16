@@ -26,11 +26,12 @@ const Landing = ({ isAuthenticated }) => {
           in your life. When you need it most, we'll remind you that{' '}
           <strong>you are enough. We have the receipts.</strong>
         </p>
-        <p>
-          <Link to='/signup' className='btn btn-lg action-button'>
-            Sign Up
-          </Link>
-        </p>
+        <Link
+          to='/signup'
+          className='btn btn-lg action-button'
+          style={{ zIndex: 2 }}>
+          Sign Up
+        </Link>
       </Col>
       <Col xs={12} md={5} lg={5} className='offset-lg-1 offset-xl-0 d-sm-block'>
         <Image

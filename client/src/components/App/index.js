@@ -20,7 +20,7 @@ import './App.css';
 const Landing = lazy(() => {
   return Promise.all([
     import('../pages/guest/Landing'),
-    new Promise(resolve => setTimeout(resolve, 500))
+    new Promise(resolve => setTimeout(resolve, 750))
   ]).then(([moduleExports]) => moduleExports);
 });
 
