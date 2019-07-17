@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Row, Col, Image } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 
-const Landing = ({ isAuthenticated }) => {
+const Landing = () => {
   // * Redirect if logged in
-  if (isAuthenticated) {
+  if (localStorage.token) {
     return <Redirect to='/dashboard' />;
   }
 
@@ -26,11 +25,12 @@ const Landing = ({ isAuthenticated }) => {
           in your life. When you need it most, we'll remind you that{' '}
           <strong>you are enough. We have the receipts.</strong>
         </p>
-        <p>
-          <Link to='/signup' className='btn btn-lg action-button'>
-            Sign Up
-          </Link>
-        </p>
+        <Link
+          to='/signup'
+          className='btn btn-lg action-button'
+          style={{ zIndex: 2 }}>
+          Sign Up
+        </Link>
       </Col>
       <Col xs={12} md={5} lg={5} className='offset-lg-1 offset-xl-0 d-sm-block'>
         <Image
@@ -43,12 +43,4 @@ const Landing = ({ isAuthenticated }) => {
   );
 };
 
-Landing.propTypes = {
-  isAuthenticated: PropTypes.bool
-};
-
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps)(Landing);
+export default connect(null)(Landing);

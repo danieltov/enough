@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { newAffirmation } from '../../../../actions/aff';
 import { setNotice } from '../../../../actions/notice';
@@ -8,44 +9,23 @@ import { setNotice } from '../../../../actions/notice';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
-const Achievement = ({ newAffirmation, setNotice, count }) => {
+const Achievement = ({ newAffirmation, setNotice, count, history }) => {
   const [formData, setFormData] = useState({
     text: '',
-    image: '',
-    dateAdded: '',
     affirmationType: 'achievement',
     title: '',
     dateAchieved: '',
     madeMeFeel: ''
   });
 
-  const {
-    text,
-    image,
-    dateAdded,
-    affirmationType,
-    title,
-    dateAchieved,
-    madeMeFeel,
-    author
-  } = formData;
+  const { text, title, dateAchieved, madeMeFeel } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(formData);
-    newAffirmation({
-      text,
-      image,
-      dateAdded,
-      affirmationType,
-      title,
-      dateAchieved,
-      madeMeFeel,
-      author
-    });
+    newAffirmation(formData, history);
   };
 
   return (
@@ -126,4 +106,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { newAffirmation, setNotice }
-)(Achievement);
+)(withRouter(Achievement));

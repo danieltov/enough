@@ -6,10 +6,10 @@ import { setNotice } from '../../../actions/notice';
 import { registerUser } from '../../../actions/auth';
 
 import { Row, Col, Image, Form, Button } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import Notice from '../../Notice';
 
-const Signup = ({ setNotice, registerUser, isAuthenticated }) => {
+const Signup = ({ setNotice, registerUser, history }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,7 +33,8 @@ const Signup = ({ setNotice, registerUser, isAuthenticated }) => {
       registerUser({
         name,
         email,
-        password
+        password,
+        history
       });
     }
     document.getElementById('password').value = '';
@@ -41,7 +42,7 @@ const Signup = ({ setNotice, registerUser, isAuthenticated }) => {
   };
 
   // * Redirect if logged in
-  if (isAuthenticated) {
+  if (localStorage.token) {
     return <Redirect to='/dashboard' />;
   }
 
@@ -122,17 +123,12 @@ const Signup = ({ setNotice, registerUser, isAuthenticated }) => {
 
 Signup.propTypes = {
   setNotice: PropTypes.func.isRequired,
-  registerUser: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
+  registerUser: PropTypes.func.isRequired
 };
-
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
 
 // ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
 
 export default connect(
-  mapStateToProps,
+  null,
   { setNotice, registerUser }
-)(Signup);
+)(withRouter(Signup));

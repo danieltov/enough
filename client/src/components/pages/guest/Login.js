@@ -6,10 +6,10 @@ import { loginUser } from '../../../actions/auth';
 import { setNotice } from '../../../actions/notice';
 
 import { Row, Col, Image, Form, Button } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import Notice from '../../Notice';
 
-const Login = ({ loginUser, isAuthenticated, setNotice }) => {
+const Login = ({ loginUser, setNotice, history }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -22,12 +22,12 @@ const Login = ({ loginUser, isAuthenticated, setNotice }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    loginUser(email, password);
+    loginUser(email, password, history);
     document.getElementById('password').value = '';
   };
 
   // * Redirect if logged in
-  if (isAuthenticated) {
+  if (localStorage.token) {
     return <Redirect to='/dashboard' />;
   }
 
@@ -91,17 +91,12 @@ const Login = ({ loginUser, isAuthenticated, setNotice }) => {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  setNotice: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
+  setNotice: PropTypes.func.isRequired
 };
-
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
 
 // ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
 
 export default connect(
-  mapStateToProps,
+  null,
   { loginUser, setNotice }
-)(Login);
+)(withRouter(Login));

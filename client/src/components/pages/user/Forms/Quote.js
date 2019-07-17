@@ -36,16 +36,7 @@ const Quote = ({ newAffirmation, setNotice, count }) => {
   const onSubmit = e => {
     e.preventDefault();
     console.log(formData);
-    newAffirmation({
-      text,
-      image,
-      dateAdded,
-      affirmationType,
-      title,
-      dateAchieved,
-      madeMeFeel,
-      author
-    });
+    newAffirmation(formData);
   };
 
   return (
