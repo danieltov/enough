@@ -155,5 +155,84 @@ module.exports = {
       console.error(err.message);
       res.status(500).send('Server Error');
     }
+  },
+  deleteAchievement: async function(req, res) {
+    try {
+      const affId = req.params.aff_id;
+
+      const user = await DB.User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: { 'affirmations.achievements': { $in: affId } },
+          $inc: { 'affirmations.count': -1 }
+        },
+        { new: true }
+      );
+
+      return res.json({
+        user
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
+  },
+  deleteGratitude: async function(req, res) {
+    try {
+      const affId = req.params.aff_id;
+
+      const user = await DB.User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: { 'affirmations.gratitude': { $in: affId } },
+          $inc: { 'affirmations.count': -1 }
+        },
+        { new: true }
+      );
+      return res.json({
+        user
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
+  },
+  deleteQuote: async function(req, res) {
+    try {
+      const affId = req.params.aff_id;
+
+      const user = await DB.User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: { 'affirmations.quotes': { $in: affId } },
+          $inc: { 'affirmations.count': -1 }
+        },
+        { new: true }
+      );
+
+      return res.json({
+        user
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
+  },
+  deleteStrength: async function(req, res) {
+    try {
+      const affId = req.params.aff_id;
+
+      const user = await DB.User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: { 'affirmations.strengths': { $in: affId } },
+          $inc: { 'affirmations.count': -1 }
+        },
+        { new: true }
+      );
+
+      return res.json({
+        user
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
   }
 };
