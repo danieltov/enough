@@ -72,4 +72,13 @@ router.post(
   controller.achievment
 );
 
+// * @route   DELETE api/aff/:id
+// * @desc    Delete affirmation by id
+// * @access  Private
+
+router.delete('/achievement/:aff_id', auth, controller.deleteAchievement);
+router.delete('/gratitude/:aff_id', auth, controller.deleteGratitude);
+router.delete('/quote/:aff_id', auth, controller.deleteQuote);
+router.delete('/strength/:aff_id', auth, controller.deleteStrength);
+
 module.exports = router;
