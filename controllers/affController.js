@@ -155,5 +155,136 @@ module.exports = {
       console.error(err.message);
       res.status(500).send('Server Error');
     }
+  },
+  deleteAchievement: async function(req, res) {
+    try {
+      const affId = req.params.aff_id;
+
+      const userOld = await DB.User.findOne({ _id: req.user.id });
+
+      const userNew = await DB.User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: { 'affirmations.achievements': { $in: affId } }
+        },
+        { new: true, safe: true, upsert: true }
+      );
+
+      userOld.affirmations.achievements.length !==
+      userNew.affirmations.achievements.length
+        ? await DB.User.findOneAndUpdate(
+            { _id: req.user.id },
+            {
+              $inc: { 'affirmations.count': -1 }
+            },
+            { new: true }
+          )
+        : res.status(400).json({ msg: 'This affirmation does not exist' });
+
+      return res.json({
+        userNew
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  },
+  deleteGratitude: async function(req, res) {
+    try {
+      const affId = req.params.aff_id;
+
+      const userOld = await DB.User.findOne({ _id: req.user.id });
+
+      const userNew = await DB.User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: { 'affirmations.gratitudes': { $in: affId } }
+        },
+        { new: true, safe: true, upsert: true }
+      );
+
+      userOld.affirmations.gratitudes.length !==
+      userNew.affirmations.gratitudes.length
+        ? await DB.User.findOneAndUpdate(
+            { _id: req.user.id },
+            {
+              $inc: { 'affirmations.count': -1 }
+            },
+            { new: true }
+          )
+        : res.status(400).json({ msg: 'This affirmation does not exist' });
+
+      return res.json({
+        userNew
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  },
+  deleteQuote: async function(req, res) {
+    try {
+      const affId = req.params.aff_id;
+
+      const userOld = await DB.User.findOne({ _id: req.user.id });
+
+      const userNew = await DB.User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: { 'affirmations.quotes': { $in: affId } }
+        },
+        { new: true, safe: true, upsert: true }
+      );
+
+      userOld.affirmations.quotes.length !== userNew.affirmations.quotes.length
+        ? await DB.User.findOneAndUpdate(
+            { _id: req.user.id },
+            {
+              $inc: { 'affirmations.count': -1 }
+            },
+            { new: true }
+          )
+        : res.status(400).json({ msg: 'This affirmation does not exist' });
+
+      return res.json({
+        userNew
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  },
+  deleteStrength: async function(req, res) {
+    try {
+      const affId = req.params.aff_id;
+
+      const userOld = await DB.User.findOne({ _id: req.user.id });
+
+      const userNew = await DB.User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: { 'affirmations.strengths': { $in: affId } }
+        },
+        { new: true, safe: true, upsert: true }
+      );
+
+      userOld.affirmations.strengths.length !==
+      userNew.affirmations.strengths.length
+        ? await DB.User.findOneAndUpdate(
+            { _id: req.user.id },
+            {
+              $inc: { 'affirmations.count': -1 }
+            },
+            { new: true }
+          )
+        : res.status(400).json({ msg: 'This affirmation does not exist' });
+
+      return res.json({
+        userNew
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
   }
 };
