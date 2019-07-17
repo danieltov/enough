@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Row, Col, Image } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 
-const Landing = ({ isAuthenticated }) => {
+const Landing = () => {
   // * Redirect if logged in
-  if (isAuthenticated) {
+  if (localStorage.token) {
     return <Redirect to='/dashboard' />;
   }
 
@@ -44,12 +43,4 @@ const Landing = ({ isAuthenticated }) => {
   );
 };
 
-Landing.propTypes = {
-  isAuthenticated: PropTypes.bool
-};
-
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps)(Landing);
+export default connect(null)(Landing);
