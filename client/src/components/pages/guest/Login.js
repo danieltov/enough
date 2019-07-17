@@ -6,10 +6,10 @@ import { loginUser } from '../../../actions/auth';
 import { setNotice } from '../../../actions/notice';
 
 import { Row, Col, Image, Form, Button } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import Notice from '../../Notice';
 
-const Login = ({ loginUser, setNotice }) => {
+const Login = ({ loginUser, setNotice, history }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -22,7 +22,7 @@ const Login = ({ loginUser, setNotice }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    loginUser(email, password);
+    loginUser(email, password, history);
     document.getElementById('password').value = '';
   };
 
@@ -99,4 +99,4 @@ Login.propTypes = {
 export default connect(
   null,
   { loginUser, setNotice }
-)(Login);
+)(withRouter(Login));
