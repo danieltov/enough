@@ -17,46 +17,52 @@ import './App.css';
 
 // * ==================== LAZY VIEWS ==================== *//
 
-const Landing = lazy(() => {
-  return Promise.all([
+const Landing = lazy(async () => {
+  const [moduleExports] = await Promise.all([
     import('../pages/guest/Landing'),
     new Promise(resolve => setTimeout(resolve, 750))
-  ]).then(([moduleExports]) => moduleExports);
+  ]);
+  return moduleExports;
 });
 
-const Login = lazy(() => {
-  return Promise.all([
+const Login = lazy(async () => {
+  const [moduleExports] = await Promise.all([
     import('../pages/guest/Login'),
     new Promise(resolve => setTimeout(resolve, 500))
-  ]).then(([moduleExports]) => moduleExports);
+  ]);
+  return moduleExports;
 });
 
-const Signup = lazy(() => {
-  return Promise.all([
+const Signup = lazy(async () => {
+  const [moduleExports] = await Promise.all([
     import('../pages/guest/Signup'),
     new Promise(resolve => setTimeout(resolve, 500))
-  ]).then(([moduleExports]) => moduleExports);
+  ]);
+  return moduleExports;
 });
 
-const Dashboard = lazy(() => {
-  return Promise.all([
+const Dashboard = lazy(async () => {
+  const [moduleExports] = await Promise.all([
     import('../pages/user/Dashboard'),
     new Promise(resolve => setTimeout(resolve, 1000))
-  ]).then(([moduleExports]) => moduleExports);
+  ]);
+  return moduleExports;
 });
 
-const Affirmation = lazy(() => {
-  return Promise.all([
+const Affirmation = lazy(async () => {
+  const [moduleExports] = await Promise.all([
     import('../pages/user/Affirmation'),
     new Promise(resolve => setTimeout(resolve, 500))
-  ]).then(([moduleExports]) => moduleExports);
+  ]);
+  return moduleExports;
 });
 
-const Affirm = lazy(() => {
-  return Promise.all([
+const Affirm = lazy(async () => {
+  const [moduleExports] = await Promise.all([
     import('../pages/user/Affirm'),
     new Promise(resolve => setTimeout(resolve, 500))
-  ]).then(([moduleExports]) => moduleExports);
+  ]);
+  return moduleExports;
 });
 
 // * Check to see if there's a token in localStorage
