@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { newAffirmation } from '../../../../actions/aff';
 import { setNotice } from '../../../../actions/notice';
@@ -8,7 +9,7 @@ import { setNotice } from '../../../../actions/notice';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
-const Quote = ({ newAffirmation, setNotice, count }) => {
+const Quote = ({ newAffirmation, setNotice, count, history }) => {
   const [formData, setFormData] = useState({
     text: '',
     image: '',
@@ -35,8 +36,7 @@ const Quote = ({ newAffirmation, setNotice, count }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(formData);
-    newAffirmation(formData);
+    newAffirmation(formData, history);
   };
 
   return (
@@ -99,4 +99,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { newAffirmation, setNotice }
-)(Quote);
+)(withRouter(Quote));
