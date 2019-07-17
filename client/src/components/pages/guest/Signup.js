@@ -6,10 +6,10 @@ import { setNotice } from '../../../actions/notice';
 import { registerUser } from '../../../actions/auth';
 
 import { Row, Col, Image, Form, Button } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import Notice from '../../Notice';
 
-const Signup = ({ setNotice, registerUser }) => {
+const Signup = ({ setNotice, registerUser, history }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,7 +33,8 @@ const Signup = ({ setNotice, registerUser }) => {
       registerUser({
         name,
         email,
-        password
+        password,
+        history
       });
     }
     document.getElementById('password').value = '';
@@ -130,4 +131,4 @@ Signup.propTypes = {
 export default connect(
   null,
   { setNotice, registerUser }
-)(Signup);
+)(withRouter(Signup));

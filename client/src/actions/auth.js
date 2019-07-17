@@ -31,7 +31,12 @@ export const loadUser = () => async dispatch => {
 };
 
 // * Register User
-export const registerUser = ({ name, email, password }) => async dispatch => {
+export const registerUser = ({
+  name,
+  email,
+  password,
+  history
+}) => async dispatch => {
   // ! Set headers for http request
   const config = {
     headers: { 'Content-Type': 'application/json' }
@@ -47,8 +52,10 @@ export const registerUser = ({ name, email, password }) => async dispatch => {
     // ! Dispatch the response data (the token), and set type to REGISTER_SUCCESS, then run loadUser()
     dispatch({ type: REGISTER_SUCCESS, payload: res.data });
     dispatch(loadUser());
+    history.push('/dashboard');
   } catch (err) {
     // ! Remember, our errors are stored as an array of objects.
+    console.error(err);
     const errors = err.response.data.errors;
 
     // ! If any errors, loop through errors and dispatch them as Notices with the type 'danger'
@@ -62,7 +69,7 @@ export const registerUser = ({ name, email, password }) => async dispatch => {
 };
 
 // * Login User
-export const loginUser = (email, password) => async dispatch => {
+export const loginUser = (email, password, history) => async dispatch => {
   // ! Set headers for http request
   const config = {
     headers: { 'Content-Type': 'application/json' }
@@ -78,6 +85,7 @@ export const loginUser = (email, password) => async dispatch => {
     // ! Dispatch the response data (the token), and set type to LOGIN_SUCCESS, then run loadUser()
     dispatch({ type: LOGIN_SUCCESS, payload: res.data });
     dispatch(loadUser());
+    history.push('/dashboard');
   } catch (err) {
     // ! Remember, our errors are stored as an array of objects.
     const errors = err.response.data.errors;
