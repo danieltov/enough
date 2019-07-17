@@ -115,7 +115,10 @@ const Affirmation = ({
             </p>
             <p className='achievement title'>&ldquo;{title}&rdquo;</p>
             <p className='achievement date'>
-              on <Moment format='MMMM DD, YYYY'>{dateAchieved}</Moment>
+              on{' '}
+              <Moment format='MMMM DD, YYYY' add={{ days: 1 }}>
+                {dateAchieved}
+              </Moment>
             </p>
             <Row>
               <Col xs={12} md={6}>
