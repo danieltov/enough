@@ -5,9 +5,6 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const controller = require('../../controllers/authController');
 
-// * ==================== MODEL ==================== * //
-const User = require('../../models/User');
-
 // * ==================== ROUTES ==================== *//
 
 // * @route   GET api/auth

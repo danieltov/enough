@@ -1,6 +1,5 @@
 // * ==================== DEPENDENCIES ==================== *//
 const express = require('express');
-const config = require('dotenv').config();
 const { body } = require('express-validator/check');
 const router = express.Router();
 const controller = require('../../controllers/userController');

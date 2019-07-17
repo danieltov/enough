@@ -1,22 +1,22 @@
 import axios from 'axios';
 import { setNotice } from './notice';
 import { ADD_AFF_SUCCESS, ADD_AFF_FAIL } from './types';
-import { loadUser } from './auth';
 import setAuthToken from '../utils/setAuthToken';
 
 // * Create New Affirmationn
 
-export const newAffirmation = ({
-  text,
-  image,
-  dateAdded,
-  affirmationType,
-  title,
-  dateAchieved,
-  madeMeFeel,
-  author
-}) => async dispatch => {
+export const newAffirmation = (formData, history) => async dispatch => {
   if (localStorage.token) setAuthToken(localStorage.token);
+
+  const {
+    text,
+    dateAdded,
+    affirmationType,
+    title,
+    dateAchieved,
+    madeMeFeel,
+    author
+  } = formData;
 
   const config = {
     headers: {
@@ -26,7 +26,6 @@ export const newAffirmation = ({
 
   let body = {};
   if (text) body.text = text;
-  if (image) body.image = image;
   if (dateAdded) body.dateAdded = dateAdded;
   if (affirmationType) body.affirmationType = affirmationType;
   if (title) body.title = title;
@@ -44,7 +43,8 @@ export const newAffirmation = ({
     }
 
     dispatch({ type: ADD_AFF_SUCCESS, payload: res.data });
-    dispatch(loadUser());
+    dispatch(setNotice('You saved an affirmation! Add another?', 'success'));
+    history.push('/affirm');
   } catch (err) {
     const errors = err.response.data.errors;
 
