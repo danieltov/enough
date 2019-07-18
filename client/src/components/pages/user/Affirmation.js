@@ -91,10 +91,9 @@ const Affirmation = ({
               your day.
             </h2>
           </Card.Title>
-          <Card.Text>
-            <p className='quote'>
-              &ldquo;{text}&rdquo; <br /> &mdash;{author}
-            </p>
+          <Card.Text as={'div'}>
+            <p className='quote'>&ldquo;{text}&rdquo;</p>
+            <p className='quote text-right'>&mdash;{author}</p>
           </Card.Text>
         </Card.Body>
         <Card.Img
