@@ -54,16 +54,21 @@ const Affirmation = ({
               </h2>
             ) : (
               <h2>
-                It may not feel like it now, but try to remember what you're{' '}
-                <strong>grateful</strong> for.
+                Try to remember what you're <strong>grateful</strong> for.
               </h2>
             )}
           </Card.Title>
           <Card.Text as={'div'}>
             <em>On a better day, you told us this:</em>
-            <div className='quote'>
-              I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
-            </div>
+            {affirmationType === 'strength' ? (
+              <div className='quote'>
+                I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
+              </div>
+            ) : (
+              <div className='quote'>
+                I am <strong>grateful</strong> for: &ldquo;{text}&rdquo;
+              </div>
+            )}
           </Card.Text>
         </Card.Body>
         <Card.Img
