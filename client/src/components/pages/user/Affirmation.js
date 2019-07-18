@@ -59,11 +59,11 @@ const Affirmation = ({
               </h2>
             )}
           </Card.Title>
-          <Card.Text>
+          <Card.Text as={'div'}>
             <em>On a better day, you told us this:</em>
-            <p className='quote'>
+            <div className='quote'>
               I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
-            </p>
+            </div>
           </Card.Text>
         </Card.Body>
         <Card.Img
@@ -111,27 +111,29 @@ const Affirmation = ({
               Look back at your <strong>accomplishments</strong>.
             </h2>
           </Card.Title>
-          <Card.Text>
-            <p>
+          <Card.Text as={'div'}>
+            <div>
               <em>Remember this one?</em>
-            </p>
-            <p className='achievement title'>&ldquo;{title}&rdquo;</p>
-            <p className='achievement date'>
+            </div>
+            <div className='achievement title'>
+              I am proud because: &ldquo;{title}&rdquo;
+            </div>
+            <div className='achievement date'>
               on{' '}
               <Moment format='MMMM DD, YYYY' add={{ days: 1 }}>
                 {dateAchieved}
               </Moment>
-            </p>
+            </div>
             <Row>
               <Col xs={12} md={6}>
-                <p className='achievement text'>
+                <div className='achievement text'>
                   What you said about it: &ldquo;{text}&rdquo;
-                </p>
+                </div>
               </Col>
               <Col xs={12} md={6}>
-                <p className='achievement text text-md-right'>
+                <div className='achievement text text-md-right'>
                   How It Felt: &ldquo;{madeMeFeel}&rdquo;
-                </p>
+                </div>
               </Col>
             </Row>
           </Card.Text>
