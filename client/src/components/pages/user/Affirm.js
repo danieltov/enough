@@ -6,7 +6,7 @@ import { newAffirmation } from '../../../actions/aff';
 import { setNotice } from '../../../actions/notice';
 
 import Achievement from './Forms/Achievement';
-import Quote from './Forms/Achievement';
+import Quote from './Forms/Quote';
 import Strength from './Forms/Strength';
 import Gratitude from './Forms/Gratitude';
 

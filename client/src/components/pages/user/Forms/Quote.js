@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { newAffirmation } from '../../../../actions/aff';
 import { setNotice } from '../../../../actions/notice';
@@ -8,40 +9,30 @@ import { setNotice } from '../../../../actions/notice';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
-const Quote = ({ newAffirmation, setNotice, count }) => {
+const Quote = ({ newAffirmation, setNotice, count, history }) => {
   const [formData, setFormData] = useState({
     text: '',
-    image: '',
-    dateAdded: '',
     affirmationType: 'quote',
-    title: '',
-    dateAchieved: '',
-    madeMeFeel: ''
+    author: ''
   });
 
-  const {
-    text,
-    image,
-    dateAdded,
-    affirmationType,
-    title,
-    dateAchieved,
-    madeMeFeel,
-    author
-  } = formData;
+  const { text, author } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(formData);
-    newAffirmation(formData);
+    newAffirmation(formData, history);
+    setFormData({ text: '', author: '' });
   };
 
   return (
-    <Row>
-      <Col xs={12} className='d-flex justify-content-center align-items-center'>
+    <Row className='d-flex justify-content-center align-items-center'>
+      <Col
+        xs={12}
+        md={10}
+        className='d-flex justify-content-center align-items-center'>
         <div className='form-container'>
           <Form onSubmit={e => onSubmit(e)}>
             <h2 className='text-center'>
@@ -50,19 +41,23 @@ const Quote = ({ newAffirmation, setNotice, count }) => {
             </h2>
             <Notice />
             <Form.Group>
+              <Form.Label htmlFor='text'>Enter a quote below:</Form.Label>
               <Form.Control
                 as='textarea'
                 name='text'
-                placeholder='Description'
+                placeholder='Example: We may encounter many defeats but we must not be defeated.'
                 onChange={e => onChange(e)}
                 value={text}
               />
             </Form.Group>
             <Form.Group>
+              <Form.Label htmlFor='author'>
+                Enter the quote's author:
+              </Form.Label>
               <Form.Control
                 type='text'
                 name='author'
-                placeholder='Author'
+                placeholder='Example: Maya Angelou'
                 onChange={e => onChange(e)}
                 value={author}
               />
@@ -99,4 +94,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { newAffirmation, setNotice }
-)(Quote);
+)(withRouter(Quote));

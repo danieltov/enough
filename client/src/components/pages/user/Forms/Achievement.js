@@ -26,11 +26,20 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
   const onSubmit = e => {
     e.preventDefault();
     newAffirmation(formData, history);
+    setFormData({
+      text: '',
+      title: '',
+      dateAchieved: '',
+      madeMeFeel: ''
+    });
   };
 
   return (
-    <Row>
-      <Col xs={12} className='d-flex justify-content-center align-items-center'>
+    <Row className='d-flex justify-content-center align-items-center'>
+      <Col
+        xs={12}
+        md={9}
+        className='d-flex justify-content-center align-items-center'>
         <div className='form-container'>
           <Form onSubmit={e => onSubmit(e)}>
             <h2 className='text-center'>
@@ -39,33 +48,44 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
             </h2>
             <Notice />
             <Form.Group>
+              <Form.Label htmlFor='title'>
+                Enter an achievement from your life&mdash;a moment you are
+                particularly proud of:
+              </Form.Label>
               <Form.Control
                 type='text'
                 name='title'
-                placeholder='Achievement'
+                placeholder='Example: I graduated from my coding bootcamp'
                 onChange={e => onChange(e)}
                 value={title}
               />
             </Form.Group>
             <Form.Group>
+              <Form.Label htmlFor='text'>
+                Why did this moment make you proud?
+              </Form.Label>
               <Form.Control
                 as='textarea'
                 name='text'
-                placeholder='Description'
+                placeholder='Example: I challenged myself and accomplished my goals.'
                 onChange={e => onChange(e)}
                 value={text}
               />
             </Form.Group>
             <Form.Group>
+              <Form.Label htmlFor='madeMeFeel'>
+                With one or a few words, finish the sentence: This achievement
+                made me feel...
+              </Form.Label>
               <Form.Control
                 type='text'
                 name='madeMeFeel'
-                placeholder='Compelete the sentence. This achievement made me feel...'
+                placeholder='Example: Like I could do anything!'
                 onChange={e => onChange(e)}
                 value={madeMeFeel}
               />
             </Form.Group>
-            <Form.Label>
+            <Form.Group>
               <Form.Label htmlFor='dateAchieved'>Date Achieved:</Form.Label>
               <Form.Control
                 type='date'
@@ -73,8 +93,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
                 onChange={e => onChange(e)}
                 value={dateAchieved}
               />
-            </Form.Label>
-
+            </Form.Group>
             <Form.Group>
               <Button variant='primary' type='submit' block>
                 Save

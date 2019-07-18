@@ -2,6 +2,7 @@ import axios from 'axios';
 import { setNotice } from './notice';
 import { ADD_AFF_SUCCESS, ADD_AFF_FAIL } from './types';
 import setAuthToken from '../utils/setAuthToken';
+import { loadUser } from './auth';
 
 // * Create New Affirmationn
 
@@ -44,6 +45,7 @@ export const newAffirmation = (formData, history) => async dispatch => {
 
     dispatch({ type: ADD_AFF_SUCCESS, payload: res.data });
     dispatch(setNotice('You saved an affirmation! Add another?', 'success'));
+    dispatch(loadUser());
     history.push('/affirm');
   } catch (err) {
     const errors = err.response.data.errors;

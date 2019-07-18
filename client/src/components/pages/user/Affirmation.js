@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -40,7 +40,26 @@ const Affirmation = ({
     madeMeFeel
   } = masterArray[0];
 
-  console.log(affirmationType);
+  const imgSet = [
+    'https://images.pexels.com/photos/1012982/pexels-photo-1012982.jpeg',
+    'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg',
+    'https://images.pexels.com/photos/1089027/pexels-photo-1089027.jpeg',
+    'https://images.pexels.com/photos/935785/pexels-photo-935785.jpeg',
+    'https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg',
+    'https://images.pexels.com/photos/988874/pexels-photo-988874.jpeg',
+    'https://images.pexels.com/photos/997704/pexels-photo-997704.jpeg',
+    'https://images.pexels.com/photos/1137313/pexels-photo-1137313.jpeg'
+  ];
+
+  const randImg = imgSet[[~~(Math.random() * imgSet.length)]];
+
+  const [imgReady, setImgReady] = useState(0);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = randImg;
+    img.onload = () => setImgReady(true);
+  }, []);
 
   const strOrGrat = (affirmationType, text) => (
     <>
@@ -49,27 +68,29 @@ const Affirmation = ({
           <Card.Title>
             {affirmationType === 'strength' ? (
               <h2>
-                You may not feel it now but remember, you are{' '}
-                <strong>strong</strong> enough.
+                You may not feel it now, but remember: you are{' '}
+                <strong>strong enough</strong>.
               </h2>
             ) : (
               <h2>
-                It may not feel like it now, but try to remember what you're
-                <strong>grateful</strong> for.
+                Try to remember what you're <strong>grateful</strong> for.
               </h2>
             )}
           </Card.Title>
-          <Card.Text>
+          <Card.Text as={'div'}>
             <em>On a better day, you told us this:</em>
-            <p className='quote'>&ldquo;{text}&rdquo;</p>
+            {affirmationType === 'strength' ? (
+              <div className='quote'>
+                I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
+              </div>
+            ) : (
+              <div className='quote'>
+                I am <strong>grateful</strong> for: &ldquo;{text}&rdquo;
+              </div>
+            )}
           </Card.Text>
         </Card.Body>
-        <Card.Img
-          variant='bottom'
-          src={
-            'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg'
-          }
-        />
+        <Card.Img variant='bottom' src={randImg} />
       </Card>
     </>
   );
@@ -84,18 +105,12 @@ const Affirmation = ({
               your day.
             </h2>
           </Card.Title>
-          <Card.Text>
-            <p className='quote'>
-              &ldquo;{text}&rdquo; <br /> &mdash;{author}
-            </p>
+          <Card.Text as={'div'}>
+            <p className='quote'>&ldquo;{text}&rdquo;</p>
+            <p className='quote text-right'>&mdash;{author}</p>
           </Card.Text>
         </Card.Body>
-        <Card.Img
-          variant='bottom'
-          src={
-            'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg'
-          }
-        />
+        <Card.Img variant='bottom' src={randImg} />
       </Card>
     </>
   );
@@ -109,39 +124,39 @@ const Affirmation = ({
               Look back at your <strong>accomplishments</strong>.
             </h2>
           </Card.Title>
-          <Card.Text>
-            <p>
+          <Card.Text as={'div'}>
+            <div>
               <em>Remember this one?</em>
-            </p>
-            <p className='achievement title'>&ldquo;{title}&rdquo;</p>
-            <p className='achievement date'>
-              on <Moment format='MMMM DD, YYYY'>{dateAchieved}</Moment>
-            </p>
+            </div>
+            <div className='achievement title'>
+              I am proud because: &ldquo;{title}&rdquo;
+            </div>
+            <div className='achievement date'>
+              on{' '}
+              <Moment format='MMMM DD, YYYY' add={{ days: 1 }}>
+                {dateAchieved}
+              </Moment>
+            </div>
             <Row>
               <Col xs={12} md={6}>
-                <p className='achievement text'>
+                <div className='achievement text'>
                   What you said about it: &ldquo;{text}&rdquo;
-                </p>
+                </div>
               </Col>
               <Col xs={12} md={6}>
-                <p className='achievement text text-md-right'>
+                <div className='achievement text text-md-right'>
                   How It Felt: &ldquo;{madeMeFeel}&rdquo;
-                </p>
+                </div>
               </Col>
             </Row>
           </Card.Text>
         </Card.Body>
-        <Card.Img
-          variant='bottom'
-          src={
-            'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg'
-          }
-        />
+        <Card.Img variant='bottom' src={randImg} />
       </Card>
     </>
   );
 
-  return (
+  return imgReady ? (
     <>
       {affirmationType !== 'achievement' && affirmationType !== 'quote'
         ? strOrGrat(affirmationType, text)
@@ -149,6 +164,8 @@ const Affirmation = ({
         ? quote(text, author)
         : achievement(title, text, dateAchieved, madeMeFeel)}
     </>
+  ) : (
+    ''
   );
 };
 
