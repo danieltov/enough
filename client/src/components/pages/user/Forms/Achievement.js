@@ -26,6 +26,12 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
   const onSubmit = e => {
     e.preventDefault();
     newAffirmation(formData, history);
+    setFormData({
+      text: '',
+      title: '',
+      dateAchieved: '',
+      madeMeFeel: ''
+    });
   };
 
   return (
@@ -44,7 +50,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
             <Form.Group>
               <Form.Label htmlFor='title'>
                 Enter an achievement from your life&mdash;a moment you are
-                particularly proud of.
+                particularly proud of:
               </Form.Label>
               <Form.Control
                 type='text'
