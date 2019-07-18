@@ -23,6 +23,7 @@ const Gratitude = ({ newAffirmation, setNotice, count, history }) => {
   const onSubmit = e => {
     e.preventDefault();
     newAffirmation(formData, history);
+    setFormData({ text: '' });
   };
 
   return (
