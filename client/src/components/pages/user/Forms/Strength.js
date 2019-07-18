@@ -12,24 +12,10 @@ import Notice from '../../../Notice';
 const Strength = ({ newAffirmation, setNotice, count, history }) => {
   const [formData, setFormData] = useState({
     text: '',
-    image: '',
-    dateAdded: '',
-    affirmationType: 'strength',
-    title: '',
-    dateAchieved: '',
-    madeMeFeel: ''
+    affirmationType: 'strength'
   });
 
-  const {
-    text,
-    image,
-    dateAdded,
-    affirmationType,
-    title,
-    dateAchieved,
-    madeMeFeel,
-    author
-  } = formData;
+  const { text } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,8 +26,11 @@ const Strength = ({ newAffirmation, setNotice, count, history }) => {
   };
 
   return (
-    <Row>
-      <Col xs={12} className='d-flex justify-content-center align-items-center'>
+    <Row className='d-flex justify-content-center align-items-center'>
+      <Col
+        xs={12}
+        md={8}
+        className='d-flex justify-content-center align-items-center'>
         <div className='form-container'>
           <Form onSubmit={e => onSubmit(e)}>
             <h2 className='text-center'>
@@ -50,10 +39,14 @@ const Strength = ({ newAffirmation, setNotice, count, history }) => {
             </h2>
             <Notice />
             <Form.Group>
+              <Form.Label htmlFor='text'>
+                Enter one of your strengths&mdash;a positive quality that you
+                recognize in yourself:
+              </Form.Label>
               <Form.Control
                 type='text'
                 name='text'
-                placeholder='Strength'
+                placeholder='Example: I love to help others.'
                 onChange={e => onChange(e)}
                 value={text}
               />
