@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -40,7 +40,26 @@ const Affirmation = ({
     madeMeFeel
   } = masterArray[0];
 
-  console.log(affirmationType);
+  const imgSet = [
+    'https://images.pexels.com/photos/1012982/pexels-photo-1012982.jpeg',
+    'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg',
+    'https://images.pexels.com/photos/1089027/pexels-photo-1089027.jpeg',
+    'https://images.pexels.com/photos/935785/pexels-photo-935785.jpeg',
+    'https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg',
+    'https://images.pexels.com/photos/988874/pexels-photo-988874.jpeg',
+    'https://images.pexels.com/photos/997704/pexels-photo-997704.jpeg',
+    'https://images.pexels.com/photos/1137313/pexels-photo-1137313.jpeg'
+  ];
+
+  const randImg = imgSet[[~~(Math.random() * imgSet.length)]];
+
+  const [imgReady, setImgReady] = useState(0);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = randImg;
+    img.onload = () => setImgReady(true);
+  }, []);
 
   const strOrGrat = (affirmationType, text) => (
     <>
@@ -71,12 +90,7 @@ const Affirmation = ({
             )}
           </Card.Text>
         </Card.Body>
-        <Card.Img
-          variant='bottom'
-          src={
-            'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg'
-          }
-        />
+        <Card.Img variant='bottom' src={randImg} />
       </Card>
     </>
   );
@@ -96,12 +110,7 @@ const Affirmation = ({
             <p className='quote text-right'>&mdash;{author}</p>
           </Card.Text>
         </Card.Body>
-        <Card.Img
-          variant='bottom'
-          src={
-            'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg'
-          }
-        />
+        <Card.Img variant='bottom' src={randImg} />
       </Card>
     </>
   );
@@ -142,17 +151,12 @@ const Affirmation = ({
             </Row>
           </Card.Text>
         </Card.Body>
-        <Card.Img
-          variant='bottom'
-          src={
-            'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg'
-          }
-        />
+        <Card.Img variant='bottom' src={randImg} />
       </Card>
     </>
   );
 
-  return (
+  return imgReady ? (
     <>
       {affirmationType !== 'achievement' && affirmationType !== 'quote'
         ? strOrGrat(affirmationType, text)
@@ -160,6 +164,8 @@ const Affirmation = ({
         ? quote(text, author)
         : achievement(title, text, dateAchieved, madeMeFeel)}
     </>
+  ) : (
+    ''
   );
 };
 
