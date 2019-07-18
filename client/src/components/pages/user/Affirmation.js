@@ -49,19 +49,21 @@ const Affirmation = ({
           <Card.Title>
             {affirmationType === 'strength' ? (
               <h2>
-                You may not feel it now but remember, you are{' '}
-                <strong>strong</strong> enough.
+                You may not feel it now, but remember: you are{' '}
+                <strong>strong enough</strong>.
               </h2>
             ) : (
               <h2>
-                It may not feel like it now, but try to remember what you're
+                It may not feel like it now, but try to remember what you're{' '}
                 <strong>grateful</strong> for.
               </h2>
             )}
           </Card.Title>
           <Card.Text>
             <em>On a better day, you told us this:</em>
-            <p className='quote'>&ldquo;{text}&rdquo;</p>
+            <p className='quote'>
+              I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
+            </p>
           </Card.Text>
         </Card.Body>
         <Card.Img
