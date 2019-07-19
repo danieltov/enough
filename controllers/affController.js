@@ -1,5 +1,6 @@
 // * ==================== DEPENDENCIES ==================== *//
 const { validationResult } = require('express-validator/check');
+const he = require('he');
 
 // * ==================== MODELS ==================== *//
 const DB = require('../models');
@@ -21,10 +22,10 @@ module.exports = {
     // * Build affirmation object
     const affirmationFields = {};
     affirmationFields.user = req.user.id;
-    affirmationFields.text = text;
+    affirmationFields.text = he.decode(text);
     affirmationFields.affirmationType = affirmationType;
     if (dateAdded) affirmationFields.dateAdded = dateAdded;
-    if (author) affirmationFields.author = author;
+    if (author) affirmationFields.author = he.decode(author);
 
     // * Add affirmationFields to corresponding model
     try {
@@ -116,12 +117,12 @@ module.exports = {
     // * Build affirmation object
     const affirmationFields = {};
     affirmationFields.user = req.user.id;
-    affirmationFields.text = text;
+    affirmationFields.text = he.decode(text);
     affirmationFields.affirmationType = affirmationType;
     affirmationFields.dateAdded = dateAdded;
-    affirmationFields.title = title;
+    affirmationFields.title = he.decode(title);
     affirmationFields.dateAchieved = dateAchieved;
-    affirmationFields.madeMeFeel = madeMeFeel;
+    affirmationFields.madeMeFeel = he.decode(madeMeFeel);
 
     // * Add affirmationFields to model
     try {
