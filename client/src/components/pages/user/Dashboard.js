@@ -1,17 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
+import { setNotice } from '../../../actions/notice';
 
 import { Row, Col } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
+import Notice from '../../Notice';
 
-const Dashboard = ({ count }) => {
+const Dashboard = ({ count, setNotice }) => {
   // * Redirect affirmation count is 0
   if (!count) return <Redirect to='/affirm' />;
 
   return (
     <Row>
       <Col xs={12}>
+        <Notice />
         <h1 className='text-center mt-0'>How are you feeling today?</h1>
       </Col>
       <Col xs={12}>
@@ -44,7 +48,8 @@ const Dashboard = ({ count }) => {
 };
 
 Dashboard.propTypes = {
-  count: PropTypes.number.isRequired
+  count: PropTypes.number.isRequired,
+  setNotice: PropTypes.func.isRequired
 };
 
 // ! Get the information from state that we need from our reducer
@@ -54,4 +59,7 @@ const mapStateToProps = state => ({
 
 // ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(
+  mapStateToProps,
+  { setNotice }
+)(Dashboard);
