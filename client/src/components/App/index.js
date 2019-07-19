@@ -65,6 +65,14 @@ const Affirm = lazy(async () => {
   return moduleExports;
 });
 
+const Profile = lazy(async () => {
+  const [moduleExports] = await Promise.all([
+    import('../pages/user/Profile'),
+    new Promise(resolve => setTimeout(resolve, 500))
+  ]);
+  return moduleExports;
+});
+
 // * Check to see if there's a token in localStorage
 if (localStorage.token) {
   // * If token, set global header
@@ -100,6 +108,7 @@ const App = () => {
                 <PrivateRoute path='/dashboard' component={Dashboard} />
                 <PrivateRoute path='/affirm' component={Affirm} />
                 <PrivateRoute path='/affirmation' component={Affirmation} />
+                <PrivateRoute path='/profile' component={Profile} />
               </Switch>
             </Container>
           </Wrapper>
