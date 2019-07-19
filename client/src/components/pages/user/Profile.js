@@ -156,6 +156,25 @@ const Profile = ({
     </>
   );
 
+  const mappedMaster = masterArray.map(obj => {
+    const {
+      text,
+      affirmationType,
+      author,
+      title,
+      dateAchieved,
+      madeMeFeel
+    } = obj;
+
+    return affirmationType !== 'achievement' && affirmationType !== 'quote' ? (
+      <>{strOrGrat(affirmationType, text)}</>
+    ) : affirmationType !== 'achievement' ? (
+      <>{quote(text, author)}</>
+    ) : (
+      <>{achievement(title, text, dateAchieved, madeMeFeel)}</>
+    );
+  });
+
   return imgReady ? <>{mappedMaster}</> : '';
 };
 
