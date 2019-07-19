@@ -10,8 +10,8 @@ router.use('/api/aff', require('./api/aff'));
 router.get('/', (req, res) => res.send('API Running'));
 
 // If no API routes are hit, send the React app
-// router.use((req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
-// });
+router.use((req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 module.exports = router;

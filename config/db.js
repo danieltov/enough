@@ -1,7 +1,11 @@
 // * ==================== CONFIG SETUP ==================== *//
 const mongoose = require('mongoose');
 const config = require('dotenv').config();
-const db = process.env.MONGODB_URI || 'mongodb://localhost/uredb';
+const db =
+  process.env.MONGODB_URI ||
+  `mongodb://${process.env.DB_USER}:${
+    process.env.DB_PASS
+  }@ds241977.mlab.com:41977/heroku_z516dgj7`;
 
 // * ==================== CONFIG FUNCTION ==================== *//
 

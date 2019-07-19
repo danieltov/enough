@@ -9,3 +9,5 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT = 'LOGOUT_SUCCESS';
 export const ADD_AFF_SUCCESS = 'ADD_AFF_SUCCESS';
 export const ADD_AFF_FAIL = 'ADD_AFF_FAIL';
+export const DELETE_AFF_SUCCESS = 'DELETE_AFF_SUCCESS';
+export const DELETE_AFF_FAIL = 'DELETE_AFF_FAIL';

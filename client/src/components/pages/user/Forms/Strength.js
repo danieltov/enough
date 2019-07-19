@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { newAffirmation } from '../../../../actions/aff';
 import { setNotice } from '../../../../actions/notice';
@@ -8,40 +9,29 @@ import { setNotice } from '../../../../actions/notice';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
-const Strength = ({ newAffirmation, setNotice, count }) => {
+const Strength = ({ newAffirmation, setNotice, count, history }) => {
   const [formData, setFormData] = useState({
     text: '',
-    image: '',
-    dateAdded: '',
-    affirmationType: 'strength',
-    title: '',
-    dateAchieved: '',
-    madeMeFeel: ''
+    affirmationType: 'strength'
   });
 
-  const {
-    text,
-    image,
-    dateAdded,
-    affirmationType,
-    title,
-    dateAchieved,
-    madeMeFeel,
-    author
-  } = formData;
+  const { text } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(formData);
-    newAffirmation(formData);
+    newAffirmation(formData, history);
+    setFormData({ text: '' });
   };
 
   return (
-    <Row>
-      <Col xs={12} className='d-flex justify-content-center align-items-center'>
+    <Row className='d-flex justify-content-center align-items-center'>
+      <Col
+        xs={12}
+        md={8}
+        className='d-flex justify-content-center align-items-center'>
         <div className='form-container'>
           <Form onSubmit={e => onSubmit(e)}>
             <h2 className='text-center'>
@@ -50,10 +40,14 @@ const Strength = ({ newAffirmation, setNotice, count }) => {
             </h2>
             <Notice />
             <Form.Group>
+              <Form.Label htmlFor='text'>
+                Enter one of your strengths&mdash;a positive quality that you
+                recognize in yourself:
+              </Form.Label>
               <Form.Control
                 type='text'
                 name='text'
-                placeholder='Strength'
+                placeholder='Example: I love to help others.'
                 onChange={e => onChange(e)}
                 value={text}
               />
@@ -90,4 +84,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { newAffirmation, setNotice }
-)(Strength);
+)(withRouter(Strength));

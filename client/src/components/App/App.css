@@ -35,6 +35,11 @@ body {
   line-height: 1.4;
 }
 
+.hero h1 a {
+  color: #fcde23;
+  font-weight: bold;
+}
+
 .hero p {
   color: rgba(255, 255, 255, 1);
   font-size: 20px;
@@ -48,6 +53,7 @@ body {
   border-radius: 10px;
   border: transparent;
   box-shadow: 8px 10px 15px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px !important;
 }
 
 .card .card-text {
@@ -73,12 +79,14 @@ body {
   background-color: #bd378c;
 }
 
-.achievementCard p,
+.quoteCard div,
+.quoteCard h2,
+.achievementCard div,
 .achievementCard h2 {
   color: white;
 }
 
-.achievementCard p {
+.achievementCard div {
   margin: 15px 0;
 }
 
@@ -104,8 +112,12 @@ body {
   background-color: #fcde23;
 }
 
-.strGratCard p {
+.strGratCard div {
   color: #292929;
+}
+
+.quoteCard {
+  background: #1abd6a;
 }
 
 .card .achievement.title,
@@ -116,20 +128,27 @@ body {
   margin-top: 30px;
 }
 
+.card .quote.text-right {
+  font-size: 24px;
+}
+
 .hero .form-container {
-  display: table;
   max-width: 100%;
   width: 100%;
-  margin: 0 auto;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .hero form {
-  display: table-cell;
   width: 100%;
   background-color: #ffffff;
   padding: 20px 10px;
   color: #505e6c;
+  border-radius: 10px;
+  border: transparent;
+  box-shadow: 8px 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+.hero form .form-group:not(:last-child) {
+  margin-bottom: 2rem;
 }
 
 .hero.affirmations form {
@@ -257,6 +276,10 @@ body {
   .card .achievement.title,
   .card .quote {
     font-size: 60px;
+  }
+
+  .card .quote.text-right {
+    font-size: 40px;
   }
 
   .achievementCard h2 {
