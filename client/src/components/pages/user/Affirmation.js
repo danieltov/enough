@@ -58,7 +58,7 @@ const Affirmation = ({
   useEffect(() => {
     const img = new Image();
     img.src = randImg;
-    img.onload = () => setImgReady(true);
+    img.onload = () => setImgReady(1);
   }, []);
 
   const strOrGrat = (affirmationType, text) => (

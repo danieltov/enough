@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { setNotice } from './notice';
-import { ADD_AFF_SUCCESS, ADD_AFF_FAIL } from './types';
+import {
+  ADD_AFF_SUCCESS,
+  ADD_AFF_FAIL,
+  DELETE_AFF_SUCCESS,
+  DELETE_AFF_FAIL
+} from './types';
 import setAuthToken from '../utils/setAuthToken';
 import { loadUser } from './auth';
 
@@ -55,5 +60,33 @@ export const newAffirmation = (formData, history) => async dispatch => {
     }
 
     dispatch({ type: ADD_AFF_FAIL });
+  }
+};
+
+export const deleteAffirmation = (affirmationType, id) => async dispatch => {
+  // * Bring in authToken
+  if (localStorage.token) setAuthToken(localStorage.token);
+
+  // * Create
+  let path = '/api/aff';
+
+  affirmationType === 'strength' && (path += `/strength/${id}`);
+  affirmationType === 'quote' && (path += `/quote/${id}`);
+  affirmationType === 'gratitude' && (path += `/gratitude/${id}`);
+  affirmationType === 'achievement' && (path += `/achievement/${id}`);
+
+  try {
+    const res = await axios.delete(path);
+    dispatch({ type: DELETE_AFF_SUCCESS, payload: res.data });
+    dispatch(setNotice('You successfully deleted an affirmation', 'success'));
+    dispatch(loadUser());
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setNotice(error.msg, 'danger')));
+    }
+
+    dispatch({ type: DELETE_AFF_FAIL });
   }
 };
