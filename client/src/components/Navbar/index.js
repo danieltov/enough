@@ -11,41 +11,67 @@ import './Navbar.css';
 const EnoughNav = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   const authLinks = (
     <Nav className='ml-auto'>
-      <Link
-        onClick={logoutUser}
-        to='/'
-        className='btn ml-auto action-button border-0'>
-        <i className='fas fa-sign-out-alt' /> Logout
-      </Link>
-      <Link
-        to='/dashboard'
-        className='btn action-button my-1 my-md-0 mr-md-2 ml-auto'>
-        Dashboard
-      </Link>
-      <Link to='/profile' className='btn action-button ml-auto'>
-        Profile
-      </Link>
+      <Nav.Item>
+        <Nav.Link
+          as={Link}
+          eventKey={2}
+          onClick={logoutUser}
+          to='/'
+          className='btn ml-auto action-button border-0'>
+          <i className='fas fa-sign-out-alt' /> Logout
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          as={Link}
+          eventKey={3}
+          to='/dashboard'
+          className='btn action-button my-1 my-md-0 mr-md-2 ml-auto'>
+          Dashboard
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          as={Link}
+          eventKey={4}
+          to='/profile'
+          className='btn action-button ml-auto'>
+          Profile
+        </Nav.Link>
+      </Nav.Item>
     </Nav>
   );
 
   const guestLinks = (
     <Nav className='ml-auto'>
-      <Link to='/login' className='btn ml-auto action-button border-0'>
-        <i className='fas fa-sign-in-alt' />
-        &nbsp; Login
-      </Link>
-      <Link to='/signup' className='btn action-button ml-auto'>
-        Sign Up
-      </Link>
+      <Nav.Item>
+        <Nav.Link
+          as={Link}
+          eventKey={2}
+          to='/login'
+          className='btn ml-auto action-button border-0'>
+          <i className='fas fa-sign-in-alt' /> &nbsp; Login
+        </Nav.Link>
+      </Nav.Item>
+
+      <Nav.Item>
+        <Nav.Link
+          as={Link}
+          eventKey={3}
+          to='/signup'
+          className='btn action-button ml-auto'>
+          Sign Up
+        </Nav.Link>
+      </Nav.Item>
     </Nav>
   );
 
   return (
-    <Navbar expand='md'>
-      <Link to='/' className='navbar-brand'>
+    <Navbar collapseOnSelect expand='lg'>
+      <Nav.Link as={Link} eventKey={1} to='/' className='navbar-brand'>
         Enough
-      </Link>
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
+      </Nav.Link>
+      <Navbar.Toggle aria-controls='nav' />
       <Navbar.Collapse id='nav'>
         {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
       </Navbar.Collapse>
