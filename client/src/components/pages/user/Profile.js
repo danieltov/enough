@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -156,7 +156,7 @@ const Profile = ({
     </>
   );
 
-  const mappedMaster = masterArray.map(obj => {
+  const mappedMaster = masterArray.map((obj, idx) => {
     const {
       text,
       affirmationType,
@@ -167,11 +167,13 @@ const Profile = ({
     } = obj;
 
     return affirmationType !== 'achievement' && affirmationType !== 'quote' ? (
-      <>{strOrGrat(affirmationType, text)}</>
+      <Fragment key={idx}>{strOrGrat(affirmationType, text, idx)}</Fragment>
     ) : affirmationType !== 'achievement' ? (
-      <>{quote(text, author)}</>
+      <Fragment key={idx}>{quote(text, author, idx)}</Fragment>
     ) : (
-      <>{achievement(title, text, dateAchieved, madeMeFeel)}</>
+      <Fragment key={idx}>
+        {achievement(title, text, dateAchieved, madeMeFeel, idx)}
+      </Fragment>
     );
   });
 
