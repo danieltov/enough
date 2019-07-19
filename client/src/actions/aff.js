@@ -51,7 +51,7 @@ export const newAffirmation = (formData, history) => async dispatch => {
     dispatch({ type: ADD_AFF_SUCCESS, payload: res.data });
     dispatch(setNotice('You saved an affirmation! Add another?', 'success'));
     dispatch(loadUser());
-    history.push('/affirm');
+    history.push('/dashboard');
   } catch (err) {
     const errors = err.response.data.errors;
 
