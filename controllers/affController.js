@@ -37,9 +37,9 @@ module.exports = {
           },
           {
             $push: {
-              'affirmations.gratitudes': gratitude._id,
-              $inc: { 'affirmations.count': 1 }
-            }
+              'affirmations.gratitudes': gratitude._id
+            },
+            $inc: { 'affirmations.count': 1 }
           },
           {
             new: true
@@ -56,12 +56,11 @@ module.exports = {
           {
             _id: affirmationFields.user
           },
-
           {
             $push: {
               'affirmations.quotes': quote._id
             },
-            $inc: { 'affirmations.count': 1 }
+            $inc: { inc }
           },
           {
             new: true
@@ -77,7 +76,9 @@ module.exports = {
         const user = await DB.User.findOneAndUpdate(
           { _id: affirmationFields.user },
           {
-            $push: { 'affirmations.strengths': strength._id },
+            $push: {
+              'affirmations.strengths': strength._id
+            },
             $inc: { 'affirmations.count': 1 }
           },
           { new: true }
