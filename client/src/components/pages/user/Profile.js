@@ -57,7 +57,7 @@ const Profile = ({
     </>
   );
 
-  const quote = (id, text, author) => (
+  const quote = (id, affirmationType, text, author) => (
     <>
       <Card className='quoteCard'>
         <Card.Body>
@@ -85,7 +85,14 @@ const Profile = ({
     </>
   );
 
-  const achievement = (id, title, text, dateAchieved, madeMeFeel) => (
+  const achievement = (
+    id,
+    affirmationType,
+    title,
+    text,
+    dateAchieved,
+    madeMeFeel
+  ) => (
     <>
       <Card className='achievementCard'>
         <Card.Body>
@@ -148,10 +155,20 @@ const Profile = ({
         {strOrGrat(_id, affirmationType, text, idx)}
       </Fragment>
     ) : affirmationType !== 'achievement' ? (
-      <Fragment key={idx}>{quote(_id, text, author, idx)}</Fragment>
+      <Fragment key={idx}>
+        {quote(_id, affirmationType, text, author, idx)}
+      </Fragment>
     ) : (
       <Fragment key={idx}>
-        {achievement(_id, title, text, dateAchieved, madeMeFeel, idx)}
+        {achievement(
+          _id,
+          affirmationType,
+          title,
+          text,
+          dateAchieved,
+          madeMeFeel,
+          idx
+        )}
       </Fragment>
     );
   });
