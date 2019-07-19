@@ -1,12 +1,20 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 import { connect } from 'react-redux';
 
-import { Row, Col, Card } from 'react-bootstrap';
-import Moment from 'react-moment';
+import { deleteAffirmation } from '../../../actions/aff';
+import { setNotice } from '../../../actions/notice';
+import { Link } from 'react-router-dom';
+
+import { Row, Col, Card, Button } from 'react-bootstrap';
+import Notice from '../../Notice';
 
 const Profile = ({
-  affirmations: { achievements, quotes, strengths, gratitudes }
+  affirmations: { achievements, quotes, strengths, gratitudes },
+  deleteAffirmation,
+  setNotice,
+  count
 }) => {
   let masterArray = [];
   if (achievements.length) achievements.forEach(a => masterArray.push(a));
@@ -14,7 +22,7 @@ const Profile = ({
   if (strengths.length) strengths.forEach(s => masterArray.push(s));
   if (gratitudes.length) gratitudes.forEach(g => masterArray.push(g));
 
-  const strOrGrat = (affirmationType, text) => (
+  const strOrGrat = (id, affirmationType, text) => (
     <>
       <Card className='strGratCard'>
         <Card.Body>
@@ -35,12 +43,21 @@ const Profile = ({
               </div>
             )}
           </Card.Text>
+          <Button
+            variant={'danger'}
+            type={'submit'}
+            size={'lg'}
+            className='mt-3'
+            block
+            onClick={() => deleteAffirmation(affirmationType, id)}>
+            Delete Affirmation
+          </Button>
         </Card.Body>
       </Card>
     </>
   );
 
-  const quote = (text, author) => (
+  const quote = (id, text, author) => (
     <>
       <Card className='quoteCard'>
         <Card.Body>
@@ -59,7 +76,7 @@ const Profile = ({
     </>
   );
 
-  const achievement = (title, text, dateAchieved, madeMeFeel) => (
+  const achievement = (id, title, text, dateAchieved, madeMeFeel) => (
     <>
       <Card className='achievementCard'>
         <Card.Body>
@@ -104,40 +121,58 @@ const Profile = ({
       author,
       title,
       dateAchieved,
-      madeMeFeel
+      madeMeFeel,
+      _id
     } = obj;
 
     return affirmationType !== 'achievement' && affirmationType !== 'quote' ? (
-      <Fragment key={idx}>{strOrGrat(affirmationType, text, idx)}</Fragment>
+      <Fragment key={idx}>
+        {strOrGrat(_id, affirmationType, text, idx)}
+      </Fragment>
     ) : affirmationType !== 'achievement' ? (
-      <Fragment key={idx}>{quote(text, author, idx)}</Fragment>
+      <Fragment key={idx}>{quote(_id, text, author, idx)}</Fragment>
     ) : (
       <Fragment key={idx}>
-        {achievement(title, text, dateAchieved, madeMeFeel, idx)}
+        {achievement(_id, title, text, dateAchieved, madeMeFeel, idx)}
       </Fragment>
     );
   });
 
   return (
     <>
-      <h1 className='text-center mt-0'>
-        Here are all of the affirmations you've entered. We hope you don't, but
-        feel free to delete some:
-      </h1>
+      <Notice />
+      {!count ? (
+        <h1 className='text-center mt-0'>
+          You haven't entered any affirmations yet.{' '}
+          <Link to='/affirm'>Add one now!</Link>
+        </h1>
+      ) : (
+        <h1 className='text-center mt-0'>
+          Here are all of the affirmations you've entered. We hope you don't,
+          but feel free to delete some:
+        </h1>
+      )}
       {<>{mappedMaster}</> || ''}
     </>
   );
 };
 
 Profile.propTypes = {
-  affirmations: PropTypes.object.isRequired
+  affirmations: PropTypes.object.isRequired,
+  deleteAffirmation: PropTypes.func.isRequired,
+  setNotice: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired
 };
 
 // ! Get the information from state that we need from our reducer
 const mapStateToProps = state => ({
-  affirmations: state.auth.user.affirmations
+  affirmations: state.auth.user.affirmations,
+  count: state.auth.user.affirmations.count
 });
 
 // ! Connect takes two parameters: 1. state that you want to map, 2. an object of actions
 
-export default connect(mapStateToProps)(Profile);
+export default connect(
+  mapStateToProps,
+  { deleteAffirmation, setNotice }
+)(Profile);
