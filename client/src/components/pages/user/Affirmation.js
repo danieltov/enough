@@ -76,6 +76,7 @@ const Affirmation = ({
                 Try to remember what you're <strong>grateful</strong> for.
               </h2>
             )}
+            <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
             <em>On a better day, you told us this:</em>
@@ -104,6 +105,7 @@ const Affirmation = ({
               Here's one of your <strong>favorite quotes</strong> to brighten up
               your day.
             </h2>
+            <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
             <p className='quote'>&ldquo;{text}&rdquo;</p>
@@ -123,6 +125,7 @@ const Affirmation = ({
             <h2>
               Look back at your <strong>accomplishments</strong>.
             </h2>
+            <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
             <div>
