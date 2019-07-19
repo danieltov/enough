@@ -60,7 +60,7 @@ module.exports = {
             $push: {
               'affirmations.quotes': quote._id
             },
-            $inc: { inc }
+            $inc: { 'affirmations.count': 1 }
           },
           {
             new: true
