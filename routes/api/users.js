@@ -1,7 +1,8 @@
 // * ==================== DEPENDENCIES ==================== *//
 const express = require('express');
-const { body } = require('express-validator/check');
 const router = express.Router();
+const auth = require('../../middleware/auth');
+const { body } = require('express-validator/check');
 const controller = require('../../controllers/userController');
 
 // * ==================== ROUTES ==================== *//
@@ -30,5 +31,11 @@ router.post(
   ],
   controller.register
 );
+
+// * @route   POST api/users/mood
+// * @desc    Record mood
+// * @access  Public
+
+router.post('/mood', auth, controller.mood);
 
 module.exports = router;
