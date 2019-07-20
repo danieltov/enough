@@ -17,7 +17,8 @@ module.exports = {
           'affirmations.strengths',
           'affirmations.achievements',
           'affirmations.quotes',
-          'affirmations.gratitudes'
+          'affirmations.gratitudes',
+          'moods'
         ])
         .select('-password'); // select method '-password' leaves off password
       res.json(user);
