@@ -1,5 +1,5 @@
 {
-  "name": "you-are-enough",
+  "name": "enough",
   "version": "0.1.0",
   "description": "an app that reminds users dealing with depression of positive affirmations that they themselves entered",
   "main": "server.js",
@@ -11,8 +11,10 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-validator": "^5.3.1",
+    "he": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.14",
+    "morgan": "^1.9.1",
     "path": "^0.12.7",
     "request": "^2.88.0"
   },
@@ -20,8 +22,10 @@
     "concurrently": "^4.1.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -40,5 +44,5 @@
   "bugs": {
     "url": "https://github.com/danieltov/you-are-enough/issues"
   },
-  "homepage": "https://github.com/danieltov/you-are-enough#readme"
+  "homepage": "http://enough-app.com/"
 }

@@ -2,6 +2,8 @@
 .env
 node_modules
 package-lock.json
+enough.bsdesign
+.DS_Store
 
 #### Client Ignores ####
 
@@ -13,8 +15,11 @@ package-lock.json
 # testing
 /client/coverage
 
+# static
+/client/static
+
 # production
-client/build
+# /client/build
 
 # misc
 client/.DS_Store

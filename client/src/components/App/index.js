@@ -26,7 +26,6 @@ const Loading = (
     <div className='insp-logo-frame' />
   </div>
 );
-
 const Landing = lazy(async () => {
   const [moduleExports] = await Promise.all([
     import('../pages/guest/Landing'),
