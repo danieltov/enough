@@ -83,7 +83,7 @@ module.exports = {
     try {
       const mood = new Mood(moodFields);
       await mood.save();
-      const user = await DB.User.findOneAndUpdate(
+      const user = await User.findOneAndUpdate(
         {
           _id: moodFields.user
         },
@@ -97,7 +97,7 @@ module.exports = {
         }
       );
       return res.json({
-        gratitude,
+        mood,
         user
       });
     } catch (err) {
