@@ -48,7 +48,7 @@ const Gratitude = ({ newAffirmation, setNotice, count, history }) => {
                 type='text'
                 name='text'
                 id='gratitudeText'
-                placeholder='Example: My dog.'
+                placeholder='e.g.: My dog.'
                 onChange={e => onChange(e)}
                 value={text}
               />
