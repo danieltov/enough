@@ -1,8 +1,11 @@
 // * ==================== DEPENDENCIES ==================== *//
-const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator/check');
+
+// * ==================== MODELS ==================== *//
+const User = require('../models/User');
+const Mood = require('../models/Mood');
 
 module.exports = {
   register: async function(req, res) {
@@ -70,6 +73,36 @@ module.exports = {
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
+    }
+  },
+  mood: async function(req, res) {
+    const { value } = req.body;
+
+    const moodFields = { user: req.user.id, value };
+
+    try {
+      const mood = new Mood(moodFields);
+      await mood.save();
+      const user = await DB.User.findOneAndUpdate(
+        {
+          _id: moodFields.user
+        },
+        {
+          $push: {
+            moods: mood._id
+          }
+        },
+        {
+          new: true
+        }
+      );
+      return res.json({
+        gratitude,
+        user
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
     }
   }
 };

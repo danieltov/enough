@@ -22,59 +22,36 @@ const Profile = ({
   if (strengths.length) strengths.forEach(s => masterArray.push(s));
   if (gratitudes.length) gratitudes.forEach(g => masterArray.push(g));
 
-  const strength = (id, affirmationType, text) => (
+  const strOrGrat = (id, affirmationType, text) => (
     <>
-      <Card>
+      <Card className='strGratCard'>
         <Card.Body>
           <Card.Title>
-            <div className='d-flex justify-content-center align-items-start'>
-              <h2 className='text-center text-uppercase font-weight-bold mr-3'>
-                Strength
-              </h2>
-              <Button
-                variant={'danger'}
-                type={'submit'}
-                onClick={() => deleteAffirmation(affirmationType, id)}>
-                <i className='fas fa-trash-alt' />
-              </Button>
-            </div>
+            <h2 className='text-center text-uppercase font-weight-bold'>
+              {affirmationType === 'strength' ? 'Strength' : 'Gratitude'}
+            </h2>
             <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
-            <em>On a better day, you told us this:</em>
-            <div className='quote'>
-              I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
-            </div>
+            {affirmationType === 'strength' ? (
+              <div className='quote'>
+                I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
+              </div>
+            ) : (
+              <div className='quote'>
+                I am <strong>grateful</strong> for: &ldquo;{text}&rdquo;
+              </div>
+            )}
           </Card.Text>
-        </Card.Body>
-      </Card>
-    </>
-  );
-
-  const gratitude = (id, affirmationType, text) => (
-    <>
-      <Card>
-        <Card.Body>
-          <Card.Title>
-            <div className='d-flex justify-content-center align-items-start'>
-              <h2 className='text-center text-uppercase font-weight-bold mr-3'>
-                Gratitude
-              </h2>
-              <Button
-                variant={'danger'}
-                type={'submit'}
-                onClick={() => deleteAffirmation(affirmationType, id)}>
-                <i className='fas fa-trash-alt' />
-              </Button>
-            </div>
-            <hr className='' />
-          </Card.Title>
-          <Card.Text as={'div'}>
-            <em>On a better day, you told us this:</em>
-            <div className='quote'>
-              I am <strong>grateful</strong> for: &ldquo;{text}&rdquo;
-            </div>
-          </Card.Text>
+          <Button
+            variant={'danger'}
+            type={'submit'}
+            size={'lg'}
+            className='mt-3'
+            block
+            onClick={() => deleteAffirmation(affirmationType, id)}>
+            Delete Affirmation
+          </Button>
         </Card.Body>
       </Card>
     </>
@@ -82,25 +59,17 @@ const Profile = ({
 
   const quote = (id, affirmationType, text, author) => (
     <>
-      <Card>
+      <Card className='quoteCard'>
         <Card.Body>
           <Card.Title>
-            <div className='d-flex justify-content-center align-items-start'>
-              <h2 className='text-center text-uppercase font-weight-bold mr-3'>
-                Quote
-              </h2>
-              <Button
-                variant={'danger'}
-                type={'submit'}
-                onClick={() => deleteAffirmation(affirmationType, id)}>
-                <i className='fas fa-trash-alt' />
-              </Button>
-            </div>
+            <h2 className='text-center text-uppercase font-weight-bold'>
+              Quote
+            </h2>
             <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
-            <div className='quote'>&ldquo;{text}&rdquo;</div>
-            <div className='quote text-right'>&mdash;{author}</div>
+            <p className='quote'>&ldquo;{text}&rdquo;</p>
+            <p className='quote text-right'>&mdash;{author}</p>
           </Card.Text>
           <Button
             variant={'danger'}
@@ -125,20 +94,12 @@ const Profile = ({
     madeMeFeel
   ) => (
     <>
-      <Card>
+      <Card className='achievementCard'>
         <Card.Body>
           <Card.Title>
-            <div className='d-flex justify-content-center align-items-start'>
-              <h2 className='text-center text-uppercase font-weight-bold mr-3'>
-                Achievement
-              </h2>
-              <Button
-                variant={'danger'}
-                type={'submit'}
-                onClick={() => deleteAffirmation(affirmationType, id)}>
-                <i className='fas fa-trash-alt' />
-              </Button>
-            </div>
+            <h2 className='text-center text-uppercase font-weight-bold'>
+              Achievement
+            </h2>
             <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
@@ -189,12 +150,14 @@ const Profile = ({
       _id
     } = obj;
 
-    return affirmationType === 'strength' ? (
-      <Fragment key={idx}>{strength(_id, affirmationType, text)}</Fragment>
-    ) : affirmationType === 'gratitude' ? (
-      <Fragment key={idx}>{gratitude(_id, affirmationType, text)}</Fragment>
-    ) : affirmationType === 'quote' ? (
-      <Fragment key={idx}>{quote(_id, affirmationType, text, author)}</Fragment>
+    return affirmationType !== 'achievement' && affirmationType !== 'quote' ? (
+      <Fragment key={idx}>
+        {strOrGrat(_id, affirmationType, text, idx)}
+      </Fragment>
+    ) : affirmationType !== 'achievement' ? (
+      <Fragment key={idx}>
+        {quote(_id, affirmationType, text, author, idx)}
+      </Fragment>
     ) : (
       <Fragment key={idx}>
         {achievement(
@@ -203,7 +166,8 @@ const Profile = ({
           title,
           text,
           dateAchieved,
-          madeMeFeel
+          madeMeFeel,
+          idx
         )}
       </Fragment>
     );

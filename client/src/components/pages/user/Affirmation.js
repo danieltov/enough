@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Moment from 'react-moment';
-
 import { connect } from 'react-redux';
 
-import { Row, Col, Card, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Row, Col, Card } from 'react-bootstrap';
+import Moment from 'react-moment';
 
 const Affirmation = ({
   affirmations: { achievements, quotes, strengths, gratitudes }
@@ -61,46 +59,36 @@ const Affirmation = ({
     const img = new Image();
     img.src = randImg;
     img.onload = () => setImgReady(1);
-  }, [randImg]);
+  }, []);
 
-  const strength = text => (
+  const strOrGrat = (affirmationType, text) => (
     <>
-      <Card className='strCard'>
+      <Card className='strGratCard'>
         <Card.Body>
           <Card.Title>
-            <h2>
-              You may not feel it now, but remember: you are{' '}
-              <strong>strong enough</strong>.
-            </h2>
+            {affirmationType === 'strength' ? (
+              <h2>
+                You may not feel it now, but remember: you are{' '}
+                <strong>strong enough</strong>.
+              </h2>
+            ) : (
+              <h2>
+                Try to remember what you're <strong>grateful</strong> for.
+              </h2>
+            )}
             <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
             <em>On a better day, you told us this:</em>
-            <div className='quote'>
-              I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
-            </div>
-          </Card.Text>
-        </Card.Body>
-        <Card.Img variant='bottom' src={randImg} />
-      </Card>
-    </>
-  );
-
-  const gratitude = text => (
-    <>
-      <Card className='gratCard'>
-        <Card.Body>
-          <Card.Title>
-            <h2>
-              Try to remember what you're <strong>grateful</strong> for.
-            </h2>
-            <hr className='' />
-          </Card.Title>
-          <Card.Text as={'div'}>
-            <em>On a better day, you told us this:</em>
-            <div className='quote'>
-              I am <strong>grateful</strong> for: &ldquo;{text}&rdquo;
-            </div>
+            {affirmationType === 'strength' ? (
+              <div className='quote'>
+                I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
+              </div>
+            ) : (
+              <div className='quote'>
+                I am <strong>grateful</strong> for: &ldquo;{text}&rdquo;
+              </div>
+            )}
           </Card.Text>
         </Card.Body>
         <Card.Img variant='bottom' src={randImg} />
@@ -120,8 +108,8 @@ const Affirmation = ({
             <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
-            <div className='quote'>&ldquo;{text}&rdquo;</div>
-            <div className='quote text-right'>&mdash;{author}</div>
+            <p className='quote'>&ldquo;{text}&rdquo;</p>
+            <p className='quote text-right'>&mdash;{author}</p>
           </Card.Text>
         </Card.Body>
         <Card.Img variant='bottom' src={randImg} />
@@ -173,29 +161,9 @@ const Affirmation = ({
 
   return imgReady ? (
     <>
-      <div className='d-flex justify-content-center mb-5'>
-        <Button
-          type={null}
-          size={'lg'}
-          className='mr-3 btn action-button'
-          as={Link}
-          to='/affirm'>
-          Add New
-        </Button>
-        <Button
-          type={null}
-          size={'lg'}
-          className='btn action-button'
-          as={Link}
-          to='/affirmation'>
-          Show Me Another
-        </Button>
-      </div>
-      {affirmationType === 'strength'
-        ? strength(text)
-        : affirmationType === 'gratitude'
-        ? gratitude(text)
-        : affirmationType === 'quote'
+      {affirmationType !== 'achievement' && affirmationType !== 'quote'
+        ? strOrGrat(affirmationType, text)
+        : affirmationType !== 'achievement'
         ? quote(text, author)
         : achievement(title, text, dateAchieved, madeMeFeel)}
     </>

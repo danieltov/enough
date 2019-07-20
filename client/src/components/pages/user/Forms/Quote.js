@@ -10,13 +10,11 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
 const Quote = ({ newAffirmation, setNotice, count, history }) => {
-  const initState = {
+  const [formData, setFormData] = useState({
     text: '',
     affirmationType: 'quote',
     author: ''
-  };
-
-  const [formData, setFormData] = useState(initState);
+  });
 
   const { text, author } = formData;
 
@@ -47,7 +45,7 @@ const Quote = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 as='textarea'
                 name='text'
-                placeholder='e.g.: May the Force be with you'
+                placeholder='Example: We may encounter many defeats but we must not be defeated.'
                 onChange={e => onChange(e)}
                 value={text}
               />
@@ -59,7 +57,7 @@ const Quote = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 type='text'
                 name='author'
-                placeholder='e.g.: Yoda'
+                placeholder='Example: Maya Angelou'
                 onChange={e => onChange(e)}
                 value={author}
               />

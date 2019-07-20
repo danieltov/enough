@@ -10,14 +10,13 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
 const Achievement = ({ newAffirmation, setNotice, count, history }) => {
-  const initState = {
+  const [formData, setFormData] = useState({
     text: '',
     affirmationType: 'achievement',
     title: '',
     dateAchieved: '',
     madeMeFeel: ''
-  };
-  const [formData, setFormData] = useState(initState);
+  });
 
   const { text, title, dateAchieved, madeMeFeel } = formData;
 
@@ -27,7 +26,12 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
   const onSubmit = e => {
     e.preventDefault();
     newAffirmation(formData, history);
-    setFormData(initState);
+    setFormData({
+      text: '',
+      title: '',
+      dateAchieved: '',
+      madeMeFeel: ''
+    });
   };
 
   return (
@@ -51,7 +55,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 type='text'
                 name='title'
-                placeholder='e.g.: I graduated from a coding bootcamp.'
+                placeholder='Example: I graduated from my coding bootcamp'
                 onChange={e => onChange(e)}
                 value={title}
               />
@@ -63,7 +67,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 as='textarea'
                 name='text'
-                placeholder='e.g.: I challenged myself.'
+                placeholder='Example: I challenged myself and accomplished my goals.'
                 onChange={e => onChange(e)}
                 value={text}
               />
@@ -76,7 +80,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 type='text'
                 name='madeMeFeel'
-                placeholder='e.g.: Like I could do anything!'
+                placeholder='Example: Like I could do anything!'
                 onChange={e => onChange(e)}
                 value={madeMeFeel}
               />
