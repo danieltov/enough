@@ -23,7 +23,7 @@ const Landing = () => {
         <p>
           An app to store your accomplishments, strengths, and other positives
           in your life. When you need it most, we'll remind you that{' '}
-          <strong>you are enough. We have the receipts.</strong>
+          <strong>you are enough. You told us yourself.</strong>
         </p>
         <Link
           to='/signup'
