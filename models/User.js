@@ -44,6 +44,12 @@ const UserSchema = new mongoose.Schema({
       required: true,
       default: 0
     }
-  }
+  ],
+  moods: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'mood'
+    }
+  ]
 });
 module.exports = User = mongoose.model('user', UserSchema, 'users');

@@ -17,6 +17,15 @@ import './App.css';
 
 // * ==================== LAZY VIEWS ==================== *//
 
+const Loading = (
+  <div className='ipl-progress-indicator' id='ipl-progress-indicator'>
+    <div className='ipl-progress-indicator-head'>
+      <div className='first-indicator' />
+      <div className='second-indicator' />
+    </div>
+    <div className='insp-logo-frame' />
+  </div>
+);
 const Landing = lazy(async () => {
   const [moduleExports] = await Promise.all([
     import('../pages/guest/Landing'),
@@ -88,16 +97,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Suspense
-          fallback={
-            <div className='ipl-progress-indicator' id='ipl-progress-indicator'>
-              <div className='ipl-progress-indicator-head'>
-                <div className='first-indicator' />
-                <div className='second-indicator' />
-              </div>
-              <div className='insp-logo-frame' />
-            </div>
-          }>
+        <Suspense fallback={Loading}>
           <Wrapper>
             <EnoughNav />
             <Container className='d-flex flex-column align-content-center hero'>
