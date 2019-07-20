@@ -51,7 +51,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 type='text'
                 name='title'
-                placeholder='Example: I graduated from my coding bootcamp'
+                placeholder='e.g.: I graduated from a coding bootcamp.'
                 onChange={e => onChange(e)}
                 value={title}
               />
@@ -63,7 +63,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 as='textarea'
                 name='text'
-                placeholder='Example: I challenged myself and accomplished my goals.'
+                placeholder='e.g.: I challenged myself.'
                 onChange={e => onChange(e)}
                 value={text}
               />
@@ -76,7 +76,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 type='text'
                 name='madeMeFeel'
-                placeholder='Example: Like I could do anything!'
+                placeholder='e.g.: Like I could do anything!'
                 onChange={e => onChange(e)}
                 value={madeMeFeel}
               />

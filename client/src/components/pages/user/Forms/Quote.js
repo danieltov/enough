@@ -47,7 +47,7 @@ const Quote = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 as='textarea'
                 name='text'
-                placeholder='Example: We may encounter many defeats but we must not be defeated.'
+                placeholder='e.g.: May the Force be with you'
                 onChange={e => onChange(e)}
                 value={text}
               />
@@ -59,7 +59,7 @@ const Quote = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 type='text'
                 name='author'
-                placeholder='Example: Maya Angelou'
+                placeholder='e.g.: Yoda'
                 onChange={e => onChange(e)}
                 value={author}
               />

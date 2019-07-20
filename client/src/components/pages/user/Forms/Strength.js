@@ -49,7 +49,7 @@ const Strength = ({ newAffirmation, setNotice, count, history }) => {
               <Form.Control
                 type='text'
                 name='text'
-                placeholder='Example: I love to help others.'
+                placeholder='e.g.: I like to help others.'
                 onChange={e => onChange(e)}
                 value={text}
               />

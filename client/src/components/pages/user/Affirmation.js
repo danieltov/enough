@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
+
 import { connect } from 'react-redux';
 
-import { Row, Col, Card } from 'react-bootstrap';
-import Moment from 'react-moment';
+import { Row, Col, Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Affirmation = ({
   affirmations: { achievements, quotes, strengths, gratitudes }
@@ -59,7 +61,7 @@ const Affirmation = ({
     const img = new Image();
     img.src = randImg;
     img.onload = () => setImgReady(1);
-  }, []);
+  }, [randImg]);
 
   const strength = text => (
     <>
@@ -118,8 +120,8 @@ const Affirmation = ({
             <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
-            <p className='quote'>&ldquo;{text}&rdquo;</p>
-            <p className='quote text-right'>&mdash;{author}</p>
+            <div className='quote'>&ldquo;{text}&rdquo;</div>
+            <div className='quote text-right'>&mdash;{author}</div>
           </Card.Text>
         </Card.Body>
         <Card.Img variant='bottom' src={randImg} />
@@ -171,6 +173,24 @@ const Affirmation = ({
 
   return imgReady ? (
     <>
+      <div className='d-flex justify-content-center mb-5'>
+        <Button
+          type={null}
+          size={'lg'}
+          className='mr-3 btn action-button'
+          as={Link}
+          to='/affirm'>
+          Add New
+        </Button>
+        <Button
+          type={null}
+          size={'lg'}
+          className='btn action-button'
+          as={Link}
+          to='/affirmation'>
+          Show Me Another
+        </Button>
+      </div>
       {affirmationType === 'strength'
         ? strength(text)
         : affirmationType === 'gratitude'
