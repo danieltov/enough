@@ -32,9 +32,11 @@ const UserSchema = new mongoose.Schema({
       ref: 'strengths'
     }
   ],
-  favoriteAnimal: {
-    type: String,
-    required: false
-  }
+  moods: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'mood'
+    }
+  ]
 });
 module.exports = User = mongoose.model('user', UserSchema, 'users');
