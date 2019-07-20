@@ -10,11 +10,13 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
 const Quote = ({ newAffirmation, setNotice, count, history }) => {
-  const [formData, setFormData] = useState({
+  const initState = {
     text: '',
     affirmationType: 'quote',
     author: ''
-  });
+  };
+
+  const [formData, setFormData] = useState(initState);
 
   const { text, author } = formData;
 

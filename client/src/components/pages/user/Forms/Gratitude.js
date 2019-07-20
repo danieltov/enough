@@ -10,10 +10,11 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
 const Gratitude = ({ newAffirmation, setNotice, count, history }) => {
-  const [formData, setFormData] = useState({
+  const initState = {
     text: '',
     affirmationType: 'gratitude'
-  });
+  };
+  const [formData, setFormData] = useState(initState);
 
   const { text } = formData;
 
@@ -23,7 +24,7 @@ const Gratitude = ({ newAffirmation, setNotice, count, history }) => {
   const onSubmit = e => {
     e.preventDefault();
     newAffirmation(formData, history);
-    setFormData({ text: '' });
+    setFormData(initState);
   };
 
   return (
