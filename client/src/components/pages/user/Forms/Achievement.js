@@ -10,13 +10,14 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
 const Achievement = ({ newAffirmation, setNotice, count, history }) => {
-  const [formData, setFormData] = useState({
+  const initState = {
     text: '',
     affirmationType: 'achievement',
     title: '',
     dateAchieved: '',
     madeMeFeel: ''
-  });
+  };
+  const [formData, setFormData] = useState(initState);
 
   const { text, title, dateAchieved, madeMeFeel } = formData;
 
@@ -26,12 +27,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
   const onSubmit = e => {
     e.preventDefault();
     newAffirmation(formData, history);
-    setFormData({
-      text: '',
-      title: '',
-      dateAchieved: '',
-      madeMeFeel: ''
-    });
+    setFormData(initState);
   };
 
   return (
