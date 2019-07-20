@@ -24,7 +24,7 @@ const Profile = ({
 
   const strOrGrat = (id, affirmationType, text) => (
     <>
-      <Card className='strGratCard'>
+      <Card>
         <Card.Body>
           <Card.Title>
             <h2 className='text-center text-uppercase font-weight-bold'>
@@ -59,7 +59,7 @@ const Profile = ({
 
   const quote = (id, affirmationType, text, author) => (
     <>
-      <Card className='quoteCard'>
+      <Card>
         <Card.Body>
           <Card.Title>
             <h2 className='text-center text-uppercase font-weight-bold'>
@@ -68,8 +68,8 @@ const Profile = ({
             <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
-            <p className='quote'>&ldquo;{text}&rdquo;</p>
-            <p className='quote text-right'>&mdash;{author}</p>
+            <div className='quote'>&ldquo;{text}&rdquo;</div>
+            <div className='quote text-right'>&mdash;{author}</div>
           </Card.Text>
           <Button
             variant={'danger'}
@@ -94,7 +94,7 @@ const Profile = ({
     madeMeFeel
   ) => (
     <>
-      <Card className='achievementCard'>
+      <Card>
         <Card.Body>
           <Card.Title>
             <h2 className='text-center text-uppercase font-weight-bold'>
