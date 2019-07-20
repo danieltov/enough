@@ -61,34 +61,44 @@ const Affirmation = ({
     img.onload = () => setImgReady(1);
   }, []);
 
-  const strOrGrat = (affirmationType, text) => (
+  const strength = text => (
     <>
-      <Card className='strGratCard'>
+      <Card className='strCard'>
         <Card.Body>
           <Card.Title>
-            {affirmationType === 'strength' ? (
-              <h2>
-                You may not feel it now, but remember: you are{' '}
-                <strong>strong enough</strong>.
-              </h2>
-            ) : (
-              <h2>
-                Try to remember what you're <strong>grateful</strong> for.
-              </h2>
-            )}
+            <h2>
+              You may not feel it now, but remember: you are{' '}
+              <strong>strong enough</strong>.
+            </h2>
             <hr className='' />
           </Card.Title>
           <Card.Text as={'div'}>
             <em>On a better day, you told us this:</em>
-            {affirmationType === 'strength' ? (
-              <div className='quote'>
-                I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
-              </div>
-            ) : (
-              <div className='quote'>
-                I am <strong>grateful</strong> for: &ldquo;{text}&rdquo;
-              </div>
-            )}
+            <div className='quote'>
+              I am <strong>strong</strong> because: &ldquo;{text}&rdquo;
+            </div>
+          </Card.Text>
+        </Card.Body>
+        <Card.Img variant='bottom' src={randImg} />
+      </Card>
+    </>
+  );
+
+  const gratitude = text => (
+    <>
+      <Card className='gratCard'>
+        <Card.Body>
+          <Card.Title>
+            <h2>
+              Try to remember what you're <strong>grateful</strong> for.
+            </h2>
+            <hr className='' />
+          </Card.Title>
+          <Card.Text as={'div'}>
+            <em>On a better day, you told us this:</em>
+            <div className='quote'>
+              I am <strong>grateful</strong> for: &ldquo;{text}&rdquo;
+            </div>
           </Card.Text>
         </Card.Body>
         <Card.Img variant='bottom' src={randImg} />
@@ -161,9 +171,11 @@ const Affirmation = ({
 
   return imgReady ? (
     <>
-      {affirmationType !== 'achievement' && affirmationType !== 'quote'
-        ? strOrGrat(affirmationType, text)
-        : affirmationType !== 'achievement'
+      {affirmationType === 'strength'
+        ? strength(text)
+        : affirmationType === 'gratitude'
+        ? gratitude(text)
+        : affirmationType === 'quote'
         ? quote(text, author)
         : achievement(title, text, dateAchieved, madeMeFeel)}
     </>

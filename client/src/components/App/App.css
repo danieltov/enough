@@ -108,8 +108,12 @@ body {
   text-align: left;
 }
 
-.strGratCard {
+.strCard {
   background-color: #fcde23;
+}
+
+.gratCard {
+  background-color: #feb017;
 }
 
 .strGratCard div {
