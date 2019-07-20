@@ -35,7 +35,7 @@ const Profile = ({
                 variant={'danger'}
                 type={'submit'}
                 onClick={() => deleteAffirmation(affirmationType, id)}>
-                <i class='fas fa-trash-alt' />
+                <i className='fas fa-trash-alt' />
               </Button>
             </div>
             <hr className='' />
@@ -64,7 +64,7 @@ const Profile = ({
                 variant={'danger'}
                 type={'submit'}
                 onClick={() => deleteAffirmation(affirmationType, id)}>
-                <i class='fas fa-trash-alt' />
+                <i className='fas fa-trash-alt' />
               </Button>
             </div>
             <hr className='' />
@@ -93,7 +93,7 @@ const Profile = ({
                 variant={'danger'}
                 type={'submit'}
                 onClick={() => deleteAffirmation(affirmationType, id)}>
-                <i class='fas fa-trash-alt' />
+                <i className='fas fa-trash-alt' />
               </Button>
             </div>
             <hr className='' />
@@ -136,7 +136,7 @@ const Profile = ({
                 variant={'danger'}
                 type={'submit'}
                 onClick={() => deleteAffirmation(affirmationType, id)}>
-                <i class='fas fa-trash-alt' />
+                <i className='fas fa-trash-alt' />
               </Button>
             </div>
             <hr className='' />
