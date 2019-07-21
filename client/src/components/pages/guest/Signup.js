@@ -63,7 +63,7 @@ const Signup = ({ setNotice, registerUser, history }) => {
         md={6}
         className='d-flex justify-content-center align-items-start'>
         <div className='form-container'>
-          <Form onSubmit={e => onSubmit(e)}>
+          <Form onSubmit={e => onSubmit(e)} autoComplete='off'>
             <h2 className='text-center'>
               <strong>Create</strong> an account.
             </h2>
@@ -75,6 +75,7 @@ const Signup = ({ setNotice, registerUser, history }) => {
                 placeholder='Name'
                 value={name}
                 onChange={e => onChange(e)}
+                autoComplete='off'
               />
             </Form.Group>
             <Form.Group>
@@ -84,6 +85,7 @@ const Signup = ({ setNotice, registerUser, history }) => {
                 placeholder='Email'
                 value={email}
                 onChange={e => onChange(e)}
+                autoComplete='off'
               />
             </Form.Group>
             <Form.Group>
@@ -94,6 +96,7 @@ const Signup = ({ setNotice, registerUser, history }) => {
                 id='password'
                 value={password}
                 onChange={e => onChange(e)}
+                autoComplete='off'
               />
             </Form.Group>
             <Form.Group>
@@ -104,6 +107,7 @@ const Signup = ({ setNotice, registerUser, history }) => {
                 placeholder='Password (repeat)'
                 value={password2}
                 onChange={e => onChange(e)}
+                autoComplete='off'
               />
             </Form.Group>
             <Form.Group>

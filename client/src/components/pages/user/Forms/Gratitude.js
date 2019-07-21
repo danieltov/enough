@@ -34,7 +34,7 @@ const Gratitude = ({ newAffirmation, setNotice, count, history }) => {
         md={8}
         className='d-flex justify-content-center align-items-center'>
         <div className='form-container'>
-          <Form id='affForm' onSubmit={e => onSubmit(e)}>
+          <Form id='affForm' onSubmit={e => onSubmit(e)} autoComplete='off'>
             <h2 className='text-center'>
               {!count ? 'Enter your first affirmation! ' : ''}What is one thing
               you're <strong>grateful</strong> for?
@@ -51,6 +51,7 @@ const Gratitude = ({ newAffirmation, setNotice, count, history }) => {
                 placeholder='e.g.: My dog.'
                 onChange={e => onChange(e)}
                 value={text}
+                autoComplete='off'
               />
             </Form.Group>
 

@@ -35,7 +35,7 @@ const Strength = ({ newAffirmation, setNotice, count, history }) => {
         md={8}
         className='d-flex justify-content-center align-items-center'>
         <div className='form-container'>
-          <Form onSubmit={e => onSubmit(e)}>
+          <Form onSubmit={e => onSubmit(e)} autoComplete='off'>
             <h2 className='text-center'>
               {!count ? 'Enter your first affirmation! ' : ''} What is one of
               your <strong>strengths</strong>?
@@ -52,6 +52,7 @@ const Strength = ({ newAffirmation, setNotice, count, history }) => {
                 placeholder='e.g.: I like to help others.'
                 onChange={e => onChange(e)}
                 value={text}
+                autoComplete='off'
               />
             </Form.Group>
 

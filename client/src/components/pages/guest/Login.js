@@ -48,7 +48,7 @@ const Login = ({ loginUser, setNotice, history }) => {
         md={6}
         className='d-flex justify-content-start align-items-center'>
         <div className='form-container'>
-          <Form onSubmit={e => onSubmit(e)}>
+          <Form onSubmit={e => onSubmit(e)} autoComplete='off'>
             <h2 className='text-center'>
               <strong>Login</strong> to your account.
             </h2>
@@ -60,6 +60,7 @@ const Login = ({ loginUser, setNotice, history }) => {
                 placeholder='Email'
                 value={email}
                 onChange={e => onChange(e)}
+                autoComplete='off'
                 required
               />
             </Form.Group>
@@ -71,6 +72,7 @@ const Login = ({ loginUser, setNotice, history }) => {
                 placeholder='Password'
                 value={password}
                 onChange={e => onChange(e)}
+                autoComplete='off'
                 required
               />
             </Form.Group>
