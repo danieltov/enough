@@ -36,7 +36,7 @@ const Quote = ({ newAffirmation, setNotice, count, history }) => {
         md={10}
         className='d-flex justify-content-center align-items-center'>
         <div className='form-container'>
-          <Form onSubmit={e => onSubmit(e)}>
+          <Form onSubmit={e => onSubmit(e)} autoComplete='off'>
             <h2 className='text-center'>
               {!count ? 'Enter your first affirmation! ' : ''}What is one of
               your <strong>favorite quotes</strong>?
@@ -50,6 +50,7 @@ const Quote = ({ newAffirmation, setNotice, count, history }) => {
                 placeholder='e.g.: May the Force be with you'
                 onChange={e => onChange(e)}
                 value={text}
+                autoComplete='off'
               />
             </Form.Group>
             <Form.Group>
@@ -62,6 +63,7 @@ const Quote = ({ newAffirmation, setNotice, count, history }) => {
                 placeholder='e.g.: Yoda'
                 onChange={e => onChange(e)}
                 value={author}
+                autoComplete='off'
               />
             </Form.Group>
             <Form.Group>

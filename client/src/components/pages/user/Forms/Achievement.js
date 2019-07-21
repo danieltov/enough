@@ -37,7 +37,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
         md={9}
         className='d-flex justify-content-center align-items-center'>
         <div className='form-container'>
-          <Form onSubmit={e => onSubmit(e)}>
+          <Form onSubmit={e => onSubmit(e)} autoComplete='off'>
             <h2 className='text-center'>
               {!count ? 'Enter your first affirmation! ' : ''}What is an{' '}
               <strong>achievement</strong> you are proud of?
@@ -54,6 +54,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
                 placeholder='e.g.: I graduated from a coding bootcamp.'
                 onChange={e => onChange(e)}
                 value={title}
+                autoComplete='off'
               />
             </Form.Group>
             <Form.Group>
@@ -66,6 +67,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
                 placeholder='e.g.: I challenged myself.'
                 onChange={e => onChange(e)}
                 value={text}
+                autoComplete='off'
               />
             </Form.Group>
             <Form.Group>
@@ -79,6 +81,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
                 placeholder='e.g.: Like I could do anything!'
                 onChange={e => onChange(e)}
                 value={madeMeFeel}
+                autoComplete='off'
               />
             </Form.Group>
             <Form.Group>
@@ -88,6 +91,7 @@ const Achievement = ({ newAffirmation, setNotice, count, history }) => {
                 name='dateAchieved'
                 onChange={e => onChange(e)}
                 value={dateAchieved}
+                autoComplete='off'
               />
             </Form.Group>
             <Form.Group>
