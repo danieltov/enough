@@ -1,6 +1,10 @@
+// * ==================== REACT ==================== *//
 import React from 'react';
+
+// * ==================== REDUX ==================== *//
 import { connect } from 'react-redux';
 
+// * ==================== VIEW COMPONENTS ==================== *//
 import { Row, Col, Image } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 
