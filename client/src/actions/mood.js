@@ -1,8 +1,9 @@
+// * ==================== IMPORTS ==================== *//
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import { POST_MOOD_SUCCESS, POST_MOOD_FAIL } from './types';
 
-// * POST Mood
+// * ==================== EXPORTS ==================== *//
 export const postMood = mood => async dispatch => {
   if (localStorage.token) setAuthToken(localStorage.token);
 

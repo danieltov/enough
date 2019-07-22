@@ -1,3 +1,4 @@
+// * ==================== IMPORTS ==================== *//
 import axios from 'axios';
 import { setNotice } from './notice';
 import {
@@ -9,7 +10,7 @@ import {
 import setAuthToken from '../utils/setAuthToken';
 import { loadUser } from './auth';
 
-// * Create New Affirmationn
+// * ==================== EXPORTS ==================== *//
 
 export const newAffirmation = (formData, history) => async dispatch => {
   if (localStorage.token) setAuthToken(localStorage.token);
