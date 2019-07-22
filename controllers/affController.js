@@ -1,6 +1,6 @@
 // * ==================== DEPENDENCIES ==================== *//
-const { validationResult } = require('express-validator/check');
 const he = require('he');
+const { validationResult } = require('express-validator/check');
 
 // * ==================== MODELS ==================== *//
 const DB = require('../models');
