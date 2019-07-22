@@ -1,8 +1,12 @@
 // * ==================== DEPENDENCIES ==================== *//
 const express = require('express');
-const { check } = require('express-validator/check');
 const router = express.Router();
+
+// * ==================== MIDDLEWARE ==================== *//
 const auth = require('../../middleware/auth');
+const { check } = require('express-validator/check');
+
+// * ==================== CONTROLLER ==================== *//
 const controller = require('../../controllers/authController');
 
 // * ==================== ROUTES ==================== *//
@@ -18,11 +22,10 @@ router.get('/', auth, controller.login);
 // * @access  Public
 router.post(
   '/',
+  // * Validate request
   [
-    // ! express-validate functions to validate request body START
     check('email', 'Please enter a valid email address').isEmail(),
     check('password', 'Password is required').exists()
-    // ! express-validate functions to validate request body END
   ],
   controller.verify
 );

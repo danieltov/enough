@@ -1,10 +1,13 @@
 // * ==================== DEPENDENCIES ==================== *//
 const express = require('express');
-const config = require('dotenv').config();
+const router = express.Router();
+
+// * ==================== MIDDLEWARE ==================== *//
+const auth = require('../../middleware/auth');
 const { body } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
-const router = express.Router();
-const auth = require('../../middleware/auth');
+
+// * ==================== CONTROLLER ==================== *//
 const controller = require('../../controllers/affController');
 
 // * ==================== ROUTES ==================== *//
