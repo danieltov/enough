@@ -10,7 +10,8 @@ const PORT = process.env.PORT || 5001;
 app.use(logger('dev'));
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
-// * Serve up static assets
+
+// * ==================== SERVE ASSETS ==================== *//
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
