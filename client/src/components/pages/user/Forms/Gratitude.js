@@ -1,11 +1,14 @@
+// * ==================== REACT ==================== *//
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+// * ==================== REDUX ==================== *//
+import { connect } from 'react-redux';
 import { newAffirmation } from '../../../../actions/aff';
 import { setNotice } from '../../../../actions/notice';
 
+// * ==================== VIEW COMPONENTS ==================== *//
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import Notice from '../../../Notice';
 
@@ -67,6 +70,7 @@ const Gratitude = ({ newAffirmation, setNotice, count, history }) => {
   );
 };
 
+// * ==================== PROP TYPES ==================== *//
 Gratitude.propTypes = {
   user: PropTypes.object.isRequired,
   newAffirmation: PropTypes.func.isRequired,

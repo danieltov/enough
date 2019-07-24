@@ -1,13 +1,16 @@
+// * ==================== REACT ==================== *//
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+// * ==================== REDUX ==================== *//
+import { connect } from 'react-redux';
 import { loginUser } from '../../../actions/auth';
 import { setNotice } from '../../../actions/notice';
 
-import { Row, Col, Image, Form, Button } from 'react-bootstrap';
-import { Link, Redirect, withRouter } from 'react-router-dom';
+// * ==================== VIEW COMPONENTS ==================== *//
 import Notice from '../../Notice';
+import { Link, Redirect, withRouter } from 'react-router-dom';
+import { Row, Col, Image, Form, Button } from 'react-bootstrap';
 
 const Login = ({ loginUser, setNotice, history }) => {
   const [formData, setFormData] = useState({
@@ -91,6 +94,7 @@ const Login = ({ loginUser, setNotice, history }) => {
   );
 };
 
+// * ==================== PROP TYPES ==================== *//
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   setNotice: PropTypes.func.isRequired

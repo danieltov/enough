@@ -1,3 +1,4 @@
+// * ==================== IMPORTS ==================== *//
 import axios from 'axios';
 import { setNotice } from './notice';
 import {
@@ -10,6 +11,8 @@ import {
   AUTH_ERROR
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
+
+// * ==================== EXPORTS ==================== *//
 
 // * Load User
 export const loadUser = () => async dispatch => {

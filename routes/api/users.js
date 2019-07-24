@@ -1,8 +1,12 @@
 // * ==================== DEPENDENCIES ==================== *//
 const express = require('express');
 const router = express.Router();
+
+// * ==================== MIDDLEWARE ==================== *//
 const auth = require('../../middleware/auth');
 const { body } = require('express-validator/check');
+
+// * ==================== CONTROLLER ==================== *//
 const controller = require('../../controllers/userController');
 
 // * ==================== ROUTES ==================== *//
@@ -13,8 +17,8 @@ const controller = require('../../controllers/userController');
 
 router.post(
   '/',
+  // * Validate request
   [
-    // ! express-validate functions to validate request body START
     body('name', 'Please enter a name to call you by')
       .not()
       .isEmpty()
@@ -27,7 +31,6 @@ router.post(
       'password',
       'Please enter a password with 8 or more characters'
     ).isLength({ min: 8 })
-    // ! express-validate functions to validate request body END
   ],
   controller.register
 );

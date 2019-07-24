@@ -7,6 +7,7 @@ const { validationResult } = require('express-validator/check');
 const User = require('../models/User');
 const Mood = require('../models/Mood');
 
+// * ==================== FUNCTIONS ==================== *//
 module.exports = {
   register: async function(req, res) {
     // ! express-validate error catching START

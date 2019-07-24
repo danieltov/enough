@@ -1,13 +1,16 @@
+// * ==================== REACT ==================== *//
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+// * ==================== REDUX ==================== *//
+import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/auth';
 
+// * ==================== VIEW COMPONENTS ==================== *//
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-// ! Destructuring props, de-structure auth prop <- Destructuring object within object
 const EnoughNav = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   const authLinks = (
     <Nav className='ml-auto'>

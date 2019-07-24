@@ -43,14 +43,14 @@ const Affirmation = ({
   } = masterArray[0];
 
   const imgSet = [
-    'https://images.pexels.com/photos/1012982/pexels-photo-1012982.jpeg',
-    'https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg',
-    'https://images.pexels.com/photos/1089027/pexels-photo-1089027.jpeg',
-    'https://images.pexels.com/photos/935785/pexels-photo-935785.jpeg',
-    'https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg',
-    'https://images.pexels.com/photos/988874/pexels-photo-988874.jpeg',
-    'https://images.pexels.com/photos/997704/pexels-photo-997704.jpeg',
-    'https://images.pexels.com/photos/1137313/pexels-photo-1137313.jpeg'
+    '../assets/img/affbg1.jpeg',
+    '../assets/img/affbg2.jpeg',
+    '../assets/img/affbg3.jpeg',
+    '../assets/img/affbg4.jpeg',
+    '../assets/img/affbg5.jpeg',
+    '../assets/img/affbg6.jpeg',
+    '../assets/img/affbg7.jpeg',
+    '../assets/img/affbg8.jpeg'
   ];
 
   const randImg = imgSet[[~~(Math.random() * imgSet.length)]];

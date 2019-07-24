@@ -1,13 +1,12 @@
 // * ==================== DEPENDENCIES ==================== * //
 const jwt = require('jsonwebtoken');
-const config = require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator/check');
 
 // * ==================== MODEL ==================== * //
 const User = require('../models/User');
 
-// * ==================== EXPORTS ==================== * //
+// * ==================== FUNCTIONS ==================== * //
 
 module.exports = {
   login: async function(req, res) {
@@ -20,7 +19,7 @@ module.exports = {
           'affirmations.gratitudes',
           'moods'
         ])
-        .select('-password'); // select method '-password' leaves off password
+        .select('-password'); // ! select method '-password' leaves off password
       res.json(user);
     } catch (err) {
       console.error(err.message);

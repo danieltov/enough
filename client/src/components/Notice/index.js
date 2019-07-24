@@ -1,6 +1,11 @@
+// * ==================== REACT ==================== *//
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// * ==================== REDUX ==================== *//
 import { connect } from 'react-redux';
+
+// * ==================== VIEW COMPONENTS ==================== *//
 import Alert from 'react-bootstrap/Alert';
 
 const Notice = ({ notices }) =>
