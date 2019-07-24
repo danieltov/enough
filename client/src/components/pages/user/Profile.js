@@ -102,15 +102,6 @@ const Profile = ({
             <div className='quote'>&ldquo;{text}&rdquo;</div>
             <div className='quote text-right'>&mdash;{author}</div>
           </Card.Text>
-          <Button
-            variant={'danger'}
-            type={'submit'}
-            size={'lg'}
-            className='mt-3'
-            block
-            onClick={() => deleteAffirmation(affirmationType, id)}>
-            Delete Affirmation
-          </Button>
         </Card.Body>
       </Card>
     </>
@@ -164,15 +155,6 @@ const Profile = ({
               </Col>
             </Row>
           </Card.Text>
-          <Button
-            variant={'danger'}
-            type={'submit'}
-            size={'lg'}
-            className='mt-3'
-            block
-            onClick={() => deleteAffirmation(affirmationType, id)}>
-            Delete Affirmation
-          </Button>
         </Card.Body>
       </Card>
     </>
